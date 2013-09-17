@@ -6,14 +6,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
 
     private TextToSpeech tts;
-    private Button btnSpeak;
     private EditText txtBox;
     
 	@Override
@@ -22,16 +23,29 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		setContentView(R.layout.activity_main);
 		
 		tts = new TextToSpeech(this, this);
-        btnSpeak = (Button) findViewById(R.id.speakOutButton);
         txtBox = (EditText) findViewById(R.id.editText);
- 
-        btnSpeak.setOnClickListener(new View.OnClickListener() {
- 
-            @Override
-            public void onClick(View v) {
-                repeatText();
+        
+        //permit to remove the focus of the keyboard
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        txtBox.setOnKeyListener(new OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                       //when the user clicks on enter, it starts the method repeatText();
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            repeatText();
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
             }
- 
         });
 	}
 
@@ -56,7 +70,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
             } else {
-                btnSpeak.setEnabled(true);
+                txtBox.setEnabled(true);
                 repeatText();
             }
  
