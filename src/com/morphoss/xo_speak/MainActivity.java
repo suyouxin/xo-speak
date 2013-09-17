@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
 
-    private TextToSpeech tts;
-    private EditText txtBox;
+    private static TextToSpeech tts;
+	private EditText txtBox;
+    private Spinner spinnerLanguage;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 		tts = new TextToSpeech(this, this);
         txtBox = (EditText) findViewById(R.id.editText);
         
+    	addListenerOnButton();
+    	addListenerOnSpinnerItemSelection();
+    	
         //permit to remove the focus of the keyboard
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         txtBox.setOnKeyListener(new OnKeyListener()
@@ -85,5 +90,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         String text = txtBox.getText().toString();
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
+
+    public void addListenerOnSpinnerItemSelection() {
+    	spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
+    	spinnerLanguage.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+      }
+    // get the selected dropdown list value
+    public void addListenerOnButton() {
+   
+  	spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
+   
+    }
+    
+    public static TextToSpeech getTts() {
+		return tts;
+	}
 
 }
