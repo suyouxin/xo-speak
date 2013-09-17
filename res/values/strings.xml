@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">xo-speak</string>
+    <string name="action_settings">Settings</string>
+    <string name="textTitle">Text To Speech</string>
+    <string name="buttonText">Speak Out!</string>
+
+</resources>
