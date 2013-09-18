@@ -6,16 +6,4 @@
     <string name="textTitle">Text To Speech</string>
     <string name="language_prompt">Language</string>
 
-    <string-array name="language_arrays">
-        <item> Language</item>
-        <item>中文 (Chinese)</item>
-        <item>Deutsch</item>
-        <item>English (Canada)</item>
-        <item>English (United States)</item>
-        <item>English (United Kingdom)</item>
-        <item>Français</item>
-        <item>Italiano</item>
-        <item>日本語 (Japanese)</item>
-    </string-array>
-
 </resources>
