@@ -1,7 +1,6 @@
 package com.morphoss.xo_speak;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -15,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements
 		TextToSpeech.OnInitListener {
@@ -22,16 +22,20 @@ public class MainActivity extends Activity implements
 	private static TextToSpeech tts;
 	private EditText txtBox;
 	private Spinner spinnerLanguage;
+	private ArrayList<String> localeNames = new ArrayList<String>();
+	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		localeList.clear();
+		localeNames.clear();
 		tts = new TextToSpeech(this, this);
 		txtBox = (EditText) findViewById(R.id.editText);
 
+		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -66,34 +70,36 @@ public class MainActivity extends Activity implements
 
 	@Override
 	public void onInit(int status) {
-
-		Locale[] locales = Locale.getAvailableLocales();
-		ArrayList<String> localeList = new ArrayList<String>();
-		for (Locale locale : locales) {
-			Log.d(TAG,
-					"language available for Locale : "
-							+ locale.getDisplayName());
-
-			// find the languages that are available for the tts
-			if (tts.isLanguageAvailable(locale) == TextToSpeech.LANG_AVAILABLE) {
-				localeList.add(locale.getDisplayName());
-			}
-		}
-
-		for (int i = 0; i < localeList.size(); i++) {
-			Log.d(TAG, "language available for tts: "
-					+ localeList.get(i));
-		}
-		spinnerLanguage = new Spinner(this);
-	    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-	            this, android.R.layout.simple_spinner_item, localeList);
-	    spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-
-	    spinnerLanguage = (Spinner) findViewById( R.id.spinnerLanguage);
-	    spinnerLanguage.setAdapter(spinnerArrayAdapter);
+		
 		if (status == TextToSpeech.SUCCESS) {
-			// set English US as default language
+			// set language of the tablet as default language
 			int result = tts.setLanguage(Locale.getDefault());
+			Locale[] locales = Locale.getAvailableLocales();
+			for (Locale locale : locales) {
+				Log.d(TAG,
+						"language available for Locale : "
+								+ locale.getDisplayName());
+
+				// find the languages that are available for the tts
+				if (tts.isLanguageAvailable(locale) == TextToSpeech.LANG_AVAILABLE) {
+					localeList.add(locale);
+				}
+			}
+
+			String defaultLanguage = getResources().getString(R.string.default_language);
+			localeNames.add(defaultLanguage );
+			for(int i=0; i<localeList.size(); i++){
+				if(localeList.get(i).getLanguage().equals(localeList.get(i).toString())){
+					localeNames.add(localeList.get(i).getDisplayLanguage());
+				}
+			}
+			spinnerLanguage = new Spinner(this);
+		    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+		            this, android.R.layout.simple_spinner_item, localeNames);
+		    spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+
+		    spinnerLanguage = (Spinner) findViewById( R.id.spinnerLanguage);
+		    spinnerLanguage.setAdapter(spinnerArrayAdapter);
 
 			if (result == TextToSpeech.LANG_MISSING_DATA
 					|| result == TextToSpeech.LANG_NOT_SUPPORTED) {

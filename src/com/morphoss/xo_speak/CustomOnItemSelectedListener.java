@@ -14,10 +14,20 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener {
 
 	private static final String TAG = "CustomOnItemSelectedListener";
 	
-	  public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
 
+	public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+			
 			 String language = parent.getItemAtPosition(pos).toString();
-			 //need to set the language that has been selected
+			 Locale loc = Locale.getDefault();
+			 
+			 for(int i=0; i<MainActivity.localeList.size(); i++){
+				 if(language.contains(MainActivity.localeList.get(i).getDisplayName())){
+					 loc = MainActivity.localeList.get(i);
+				 }
+				 if(language.equals("Default")) loc = Locale.getDefault();
+			 }
+			//need to set the language that has been selected
+			 MainActivity.getTts().setLanguage(loc);
 		  }
 		 
 		  @Override
