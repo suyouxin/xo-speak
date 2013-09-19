@@ -3,7 +3,9 @@ package com.morphoss.xo_speak;
 import java.util.ArrayList;
 import java.util.Locale;
 
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -130,5 +132,11 @@ public class MainActivity extends Activity implements
 	public static TextToSpeech getTts() {
 		return tts;
 	}
+	
+	public void StartMove(View view) {
+		Intent intent = new Intent(this, MoveActivity.class);
+		startActivity(intent);
+		finish();
+	}          
 
 }

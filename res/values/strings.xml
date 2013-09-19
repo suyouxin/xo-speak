@@ -6,5 +6,8 @@
     <string name="textTitle">Text To Speech</string>
     <string name="language_prompt">Language</string>
     <string name="default_language">Default</string>
+    <string name="start">Start</string>
+    <string name="start2">Different moves</string>
+    <string name="start3">Rotate</string>
 
 </resources>

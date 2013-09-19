@@ -72,6 +72,18 @@
             android:scaleType="centerInside"
             android:src="@drawable/mouth" />
 
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="30dp"
+            android:onClick="StartMove"
+            android:text="@string/start"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <Spinner
             android:id="@+id/spinnerLanguage"
             android:layout_width="250dp"
