@@ -38,8 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="130dp"
             android:scaleType="fitCenter"
             android:src="@drawable/eye_in" />
 
@@ -58,8 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
-            android:layout_marginRight="110dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="130dp"
             android:scaleType="fitCenter"
             android:src="@drawable/eye_in" />
 
@@ -71,18 +71,6 @@
             android:layout_marginTop="280dp"
             android:scaleType="centerInside"
             android:src="@drawable/mouth" />
-
-        <Button
-            android:id="@+id/buttonStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center"
-            android:layout_marginRight="30dp"
-            android:onClick="StartMove"
-            android:text="@string/start"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerLanguage"
