@@ -34,8 +34,6 @@ public class MainActivity extends Activity implements
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
-	private ImageView eyeLeft;
-	private ImageView eyeRight;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,31 +44,7 @@ public class MainActivity extends Activity implements
 		tts = new TextToSpeech(this, this);
 		txtBox = (EditText) findViewById(R.id.editText);
 
-		eyeLeft = (ImageView) findViewById(R.id.eyeLeftInside);
-		eyeRight = (ImageView) findViewById(R.id.eyeRightInside);
-		AnimationSet as1 = new AnimationSet(true);
-        as1.setFillAfter(true);
-        float dist = 1.0f;
-        // The following is too slow just to inspect the animation
-        int duration = 3000; // 5 seconds
-        // Tried the following: RELATIVE_TO_SELF and RELATIVE_TO_PARENT but no difference
-        int ttype = Animation.RELATIVE_TO_SELF; // Type of translation
-        // Move to X: distance , Y: distance
-        TranslateAnimation ta1 = new TranslateAnimation( ttype,0,ttype,dist,ttype,0, ttype,0); 
-        ta1.setDuration(duration);
-        // Add Translation to the set
-        as1.addAnimation(ta1);
-
-        // Rotate around its center
-       int rtype = Animation.RELATIVE_TO_SELF;
-        float rotation = 200;
-        RotateAnimation ra1 = new RotateAnimation(300, rotation,rtype,0.5f , rtype,0.5f );
-        ra1.setDuration(duration);
-        as1.addAnimation(ra1);
-
-        eyeLeft.startAnimation(as1); 
-        eyeRight.startAnimation(as1);
-        
+		
 		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
@@ -171,10 +145,6 @@ public class MainActivity extends Activity implements
 		return tts;
 	}
 	
-	public void StartMove(View view) {
-		Intent intent = new Intent(this, MoveActivity.class);
-		startActivity(intent);
-		finish();
-	}          
+  
 
 }
