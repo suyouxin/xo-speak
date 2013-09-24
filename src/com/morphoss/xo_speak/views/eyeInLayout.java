@@ -15,6 +15,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 	private int mEye1Y;
 	private int mEye2X;
 	private int mEye2Y;
+	public static final String TAG = "eyeInLayout";
 	
 	private Paint p = new Paint();
 	
@@ -79,6 +80,8 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		int X2 = width-height;
 		int Y2 = height;
 		
+		if(Y1 < touchY){
+			Log.d(TAG,"Y1 < touchY");
 		double centerToPoint1 = Math.sqrt(Math.pow(touchX-X1, 2)+Math.pow(touchY-Y1, 2));
 		double centerToPoint2 = Math.sqrt(Math.pow(touchX-X2, 2)+Math.pow(touchY-Y2, 2));
 		int projX1 = (int) (X1 + ((radius*(touchX-X1))/centerToPoint1));
@@ -89,7 +92,22 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		mEye1Y = projY1;
 		mEye2X = projX2;
 		mEye2Y = projY2;
-		
+		}
+		if(Y1 > touchY){
+			Log.d(TAG,"Y1 > touchY, touchX > X1");
+			double centerToPoint3 = Math.sqrt(Math.pow(touchX-X1, 2)+Math.pow(Y1-touchY, 2));
+			double centerToPoint4 = Math.sqrt(Math.pow(touchX-X2, 2)+Math.pow(Y2-touchY, 2));
+			int projX3 = (int) (X1 + ((radius*(touchX-X1))/centerToPoint3));
+			int projX4 = (int) (X2 + ((radius*(touchX-X2))/centerToPoint4));
+			int projY3 = (int) (Y1 - Math.sqrt(Math.pow(radius, 2) - Math.pow(projX3 - X1, 2)));
+			int projY4 = (int) (Y2 - Math.sqrt(Math.pow(radius, 2) - Math.pow(projX4 - X2, 2)));
+			Log.d(TAG,"X3 : "+projX3+" Y3 : "+projY3);
+			Log.d(TAG,"X4 : "+projX4+" Y4 : "+projY4);
+			mEye1X = projX3;
+			mEye1Y = projY3;
+			mEye2X = projX4;
+			mEye2Y = projY4;
+		}
 		
     }
 	
