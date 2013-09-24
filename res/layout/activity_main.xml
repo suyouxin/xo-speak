@@ -29,6 +29,17 @@
             android:prompt="@string/language_prompt" />
 
         <com.morphoss.xo_speak.views.eyeOutLayout
+            android:id="@+id/eyeOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.morphoss.xo_speak.views.eyeInLayout
+            android:id="@+id/eyeIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.morphoss.xo_speak.views.MouthLayout
+            android:id="@+id/mouth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </FrameLayout>

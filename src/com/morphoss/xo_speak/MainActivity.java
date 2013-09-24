@@ -3,9 +3,13 @@ package com.morphoss.xo_speak;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import com.morphoss.xo_speak.views.eyeInLayout;
+import com.morphoss.xo_speak.views.eyeOutLayout;
+
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -13,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
@@ -34,7 +39,10 @@ public class MainActivity extends Activity implements
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
-
+	private View eyesIn;
+	private float x =0;
+	private float y =0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +52,7 @@ public class MainActivity extends Activity implements
 		tts = new TextToSpeech(this, this);
 		txtBox = (EditText) findViewById(R.id.editText);
 
-		
+		eyesIn = findViewById(R.id.eyeIn);
 		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
@@ -78,6 +86,16 @@ public class MainActivity extends Activity implements
 		super.onDestroy();
 	}
 
+	
+	protected void moveCircle(int x, int y){
+		AnimationSet as = new AnimationSet(true);
+		as.setFillAfter(true);
+		int duration = 2000;
+		TranslateAnimation ta = new TranslateAnimation(0, x, 0, y);
+		ta.setDuration(duration);
+		as.addAnimation(ta);
+		eyesIn.startAnimation(as);
+	}
 	@Override
 	public void onInit(int status) {
 		
@@ -120,14 +138,6 @@ public class MainActivity extends Activity implements
 		}
 	}
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        // MotionEvent object holds X-Y values
-
-            Log.d(TAG, "");
- 
-        return super.onKeyUp(keyCode, event);
-    }
     
 	private void repeatText() {
 
@@ -144,6 +154,7 @@ public class MainActivity extends Activity implements
 	public static TextToSpeech getTts() {
 		return tts;
 	}
+
 	
   
 
