@@ -30,13 +30,23 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 	}
 	
 	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		int width = this.getWidth()/2;
+		int height = this.getHeight()/4;
+		mEye1X = width+height;
+		mEye1Y = (int) (1.2*height);
+		mEye2X = width-height;
+		mEye2Y = (int) (1.2*height);
+	}
+	@Override
 	protected void onDraw(Canvas canvas) {
 		// smooths
 		int width = this.getWidth()/2;
 		int height = this.getHeight()/4;
 		p.setColor(Color.BLACK);
 		p.setStyle(Paint.Style.FILL); 
-		int radius = width/12;
+		int radius = width/18;
 		canvas.drawCircle(mEye1X, mEye1Y,radius, p);
 		canvas.drawCircle(mEye2X, mEye2Y, radius, p);
 	}
@@ -47,7 +57,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		switch ( event.getAction() ) {
         case MotionEvent.ACTION_DOWN:
         	Log.d("debug", "x: " + event.getX() + " y: " + event.getY());
-        	calcEye((int)event.getX(), (int)event.getY(), 0 ,0);
+        	calcEye((int)event.getX(), (int)event.getY());
         	this.invalidate();
         	break;
         default:
@@ -57,33 +67,15 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		return false;
 	}
 
-    private void calcEye(int touchX, int touchY, int centerX, int centerY) {
+    private void calcEye(int touchX, int touchY) {
     	int width = this.getWidth()/2;
 		int height = this.getHeight()/4;
-		int radius = width/12;
+		int radius = width/8;
     	
 		int X1 = width+height;
 		int Y1 = height;
 		int X2 = width-height;
 		int Y2 = height;
-		
-		/*int x1 = touchX;
-		int x2 = touchX;
-    	if (touchX > X1 + radius)
-    		x1 = X1 + radius;
-    	if (touchX < X1 - radius)
-    		x1 = X1 - radius;
-    	if(touchX > X2 + radius)
-    		x2 = X2 + radius;
-    	if (touchX < X2 - radius)
-    		x2 = X2 - radius;
-    	
-    	double y = Math.sqrt(Math.pow(radius, 2) - Math.pow(x1 - X1, 2)) + Y1;
-    	double y2 = Math.sqrt(Math.pow(radius, 2) - Math.pow(x2 - X2, 2)) + Y2;
-    	mEye1X = x1;
-		mEye1Y = (int)y;
-		mEye2X = x2;
-		mEye2Y = (int)y2;*/
 		
 		double centerToPoint1 = Math.sqrt(Math.pow(touchX-X1, 2)+Math.pow(touchY-Y1, 2));
 		double centerToPoint2 = Math.sqrt(Math.pow(touchX-X2, 2)+Math.pow(touchY-Y2, 2));
