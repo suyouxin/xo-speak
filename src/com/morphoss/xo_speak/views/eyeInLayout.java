@@ -13,6 +13,8 @@ import android.view.View;
 public class eyeInLayout extends View implements SurfaceHolder.Callback {
 	private int mEye1X;
 	private int mEye1Y;
+	private int mEye2X;
+	private int mEye2Y;
 	
 	private Paint p = new Paint();
 	
@@ -34,9 +36,9 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		int height = this.getHeight()/4;
 		p.setColor(Color.BLACK);
 		p.setStyle(Paint.Style.FILL); 
-		
-		canvas.drawCircle(mEye1X, mEye1Y,width/12, p);
-		canvas.drawCircle(width-height, height, width/12, p);
+		int radius = width/12;
+		canvas.drawCircle(mEye1X, mEye1Y,radius, p);
+		canvas.drawCircle(mEye2X, mEye2Y, radius, p);
 	}
 	
 	@Override
@@ -62,18 +64,26 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
     	
 		int X1 = width+height;
 		int Y1 = height;
+		int X2 = width-height;
+		int Y2 = height;
 		
 		int x = touchX;
-		
+		int x2 = touchX;
     	if (touchX > X1 + radius)
     		x = X1 + radius;
     	if (touchX < X1 - radius)
     		x = X1 - radius;
+    	if(touchX > X2 + radius)
+    		x2 = X2 + radius;
+    	if (touchX < X2 - radius)
+    		x2 = X2 - radius;
     	
     	double y = Math.sqrt(Math.pow(radius, 2) - Math.pow(x - X1, 2)) + Y1;
-    	
+    	double y2 = Math.sqrt(Math.pow(radius, 2) - Math.pow(x2 - X2, 2)) + Y2;
     	mEye1X = x;
 		mEye1Y = (int)y;
+		mEye2X = x2;
+		mEye2Y = (int)y;
     }
 	
     @Override
