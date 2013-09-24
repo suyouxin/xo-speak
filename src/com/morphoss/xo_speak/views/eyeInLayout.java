@@ -56,15 +56,17 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		
 		switch ( event.getAction() ) {
         case MotionEvent.ACTION_DOWN:
+        case MotionEvent.ACTION_MOVE:
         	Log.d("debug", "x: " + event.getX() + " y: " + event.getY());
         	calcEye((int)event.getX(), (int)event.getY());
         	this.invalidate();
         	break;
+
         default:
         	break;
            
 		}
-		return false;
+		return true;
 	}
 
     private void calcEye(int touchX, int touchY) {
