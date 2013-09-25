@@ -4,8 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.wifi.p2p.WifiP2pManager.ActionListener;
+import android.text.Editable;
+import android.text.method.KeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -122,4 +126,5 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
  
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {}
+
 }
