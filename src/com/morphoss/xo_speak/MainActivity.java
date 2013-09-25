@@ -5,19 +5,19 @@ import java.util.Locale;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-
-import com.morphoss.xo_speak.views.eyeInLayout;
 
 public class MainActivity extends Activity implements
 		TextToSpeech.OnInitListener {
@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
 	private View eyesIn;
+	private Handler h = new Handler();
 	
 	@SuppressLint("ServiceCast")
 	@Override
@@ -55,7 +56,15 @@ public class MainActivity extends Activity implements
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
-						repeatText();
+						InputMethodManager imm = (InputMethodManager)getSystemService(
+							      Context.INPUT_METHOD_SERVICE);
+							imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
+							h.postDelayed(new Runnable() {
+					            public void run() {
+					            	repeatText();
+					            }
+					        }, 1000);
+						
 						return true;
 					default:
 						break;
@@ -66,6 +75,7 @@ public class MainActivity extends Activity implements
 		});
 	}
 
+	
 	@Override
 	public void onDestroy() {
 		// shutdown the tts when the activity is destroyed
