@@ -3,9 +3,13 @@ package com.morphoss.xo_speak;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import com.morphoss.xo_speak.views.MouthLayout;
+import com.morphoss.xo_speak.views.eyeInLayout;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -28,7 +32,7 @@ public class MainActivity extends Activity implements
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
-	private View eyesIn;
+	private eyeInLayout eyesIn;
 	private Handler h = new Handler();
 	
 	@SuppressLint("ServiceCast")
@@ -42,7 +46,7 @@ public class MainActivity extends Activity implements
 		tts = new TextToSpeech(this, this);
 		txtBox = (EditText) findViewById(R.id.editText);
 
-		eyesIn = findViewById(R.id.eyeIn);
+		eyesIn = (eyeInLayout)findViewById(R.id.eyeIn);
 		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
@@ -75,7 +79,6 @@ public class MainActivity extends Activity implements
 		});
 	}
 
-	
 	@Override
 	public void onDestroy() {
 		// shutdown the tts when the activity is destroyed
@@ -133,7 +136,39 @@ public class MainActivity extends Activity implements
 
 		String text = txtBox.getText().toString();
 		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+		Thread thread = new Thread(new CheckTTSStillGoing());
+		thread.start();
+		// h.post(new CheckTTSStillGoing());
 	}
+	
+	class CheckTTSStillGoing implements Runnable {
+		
+		@Override
+		public void run() {
+
+			int i = 0;
+			
+			while (true) {
+				if (!tts.isSpeaking())
+					break;
+				eyesIn.calcEye(i, i);
+				// eyesIn.invalidate();
+				h.post(new Runnable() {
+
+					@Override
+					public void run() {
+						eyesIn.invalidate();
+					}
+				});
+				i++;
+				if (i > 500)
+					i = 0;
+			}
+			Log.e("TTS", "speak finished");
+		}
+		
+	}
+
 
 	public void addListenerOnSpinnerItemSelection() {
 		spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);

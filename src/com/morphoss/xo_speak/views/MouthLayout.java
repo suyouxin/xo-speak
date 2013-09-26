@@ -11,6 +11,9 @@ import android.view.View;
 
 public class MouthLayout extends View implements SurfaceHolder.Callback {
 
+	private static Paint p = new Paint();
+	private int width;
+	private int height;
 	public MouthLayout(Context context) {
 		super(context);
 	}
@@ -24,16 +27,15 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 	@Override
 	protected void onDraw(Canvas canvas) {
 
-		Paint p = new Paint();
 		// smooths
-		int width = this.getWidth()/2;
-		int height = this.getHeight()/4;
+		width = this.getMeasuredWidth()/2;
+		height = this.getMeasuredHeight()/4;
 		p.setColor(Color.BLACK);
 		p.setStyle(Paint.Style.STROKE); 
 		p.setStrokeWidth(4.0f);
-		
 		canvas.drawLine(width-height, 3*height, width+height, 3*height, p);
 	}
+
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
  

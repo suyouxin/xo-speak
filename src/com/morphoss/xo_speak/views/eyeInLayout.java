@@ -37,12 +37,13 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		int width = this.getWidth()/2;
-		int height = this.getHeight()/4;
+		int width = this.getMeasuredWidth()/2;
+		int height = this.getMeasuredHeight()/4;
 		mEye1X = width+height;
 		mEye1Y = (int) (1.2*height);
 		mEye2X = width-height;
 		mEye2Y = (int) (1.2*height);
+		Log.d(TAG,"eyeInLayout onMeasure w: " + width + " h: " + height);
 	}
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -74,9 +75,9 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		return true;
 	}
 
-    private void calcEye(int touchX, int touchY) {
-    	int width = this.getWidth()/2;
-		int height = this.getHeight()/4;
+    public void calcEye(int touchX, int touchY) {
+    	int width = this.getMeasuredWidth()/2;
+		int height = this.getMeasuredHeight()/4;
 		int radius = width/8;
     	
 		int X1 = width+height;
