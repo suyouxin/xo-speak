@@ -3,6 +3,7 @@ package com.morphoss.xo_speak;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import bitoflife.chatterbean.ChatterBean;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +29,8 @@ public class MainActivity extends Activity implements
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
 
+	private ChatterBean mCb;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,15 +45,18 @@ public class MainActivity extends Activity implements
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		txtBox.setOnKeyListener(new OnKeyListener() {
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {	
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					switch (keyCode) {
 					// when the user clicks on enter, it starts the method
 					// repeatText();
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
-						repeatText();
+						// repeatText();
+					    String text = txtBox.getText().toString();
+					    repeatText(robotTest(text));
 						return true;
+
 					default:
 						break;
 					}
@@ -58,6 +64,8 @@ public class MainActivity extends Activity implements
 				return false;
 			}
 		});
+		
+		robotInit();
 	}
 
 	@Override
@@ -108,7 +116,8 @@ public class MainActivity extends Activity implements
 				Log.e("TTS", "This Language is not supported");
 			} else {
 				txtBox.setEnabled(true);
-				repeatText();
+				String text = txtBox.getText().toString();
+				repeatText(text);
 			}
 
 		} else {
@@ -117,10 +126,11 @@ public class MainActivity extends Activity implements
 
 	}
 
-	private void repeatText() {
+	private void repeatText(String words) {
 
-		String text = txtBox.getText().toString();
-		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+		// String text = txtBox.getText().toString();
+	    Log.d("Test", words);
+		tts.speak(words, TextToSpeech.QUEUE_FLUSH, null);
 	}
 
 	public void addListenerOnSpinnerItemSelection() {
@@ -138,5 +148,19 @@ public class MainActivity extends Activity implements
 		startActivity(intent);
 		finish();
 	}          
+	
+	public void robotInit() {
+	    mCb = new ChatterBean(getResources().getAssets());
+        mCb.init();
+	}
 
+	public String robotTest(String question) {
+	    /*
+        Log.d("Test", mCb.respond("How are you"));
+        Log.d("Test", mCb.respond("who are you"));
+        Log.d("Test", mCb.respond("what is the weather"));
+        Log.d("Test", mCb.respond("au canada"));
+        Log.d("Test", mCb.respond("a robot"));*/
+        return mCb.respond(question);
+	}
 }
