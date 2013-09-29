@@ -161,6 +161,14 @@ public class MainActivity extends Activity implements
         Log.d("Test", mCb.respond("what is the weather"));
         Log.d("Test", mCb.respond("au canada"));
         Log.d("Test", mCb.respond("a robot"));*/
-        return mCb.respond(question);
+	    String ret;
+	    
+	    try {
+	        ret = mCb.respond(question);
+	    }
+	    catch(Exception e) {
+	        ret = "I don't know!";
+	    }
+        return ret;
 	}
 }
