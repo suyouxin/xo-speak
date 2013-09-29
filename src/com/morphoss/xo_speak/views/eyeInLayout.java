@@ -116,6 +116,26 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		
     }
 	
+    public void moveEye(double i) {
+    	int width = this.getMeasuredWidth()/2;
+		int height = this.getMeasuredHeight()/4;
+		int radius = width/8;
+    	
+		int X1 = width+height;
+		int Y1 = height;
+		int X2 = width-height;
+		int Y2 = height;
+		mEye1Y = Y1;
+		mEye2Y = Y2;
+		mEye1X = X1;
+		mEye2X = X2;
+			mEye1Y += i;
+			mEye2Y += i;
+			if(mEye1Y >= Y1+radius || mEye2Y >= Y2+radius){
+				mEye1Y = Y1 - radius;
+				mEye2Y = Y2 - radius;
+			}
+    }
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
  

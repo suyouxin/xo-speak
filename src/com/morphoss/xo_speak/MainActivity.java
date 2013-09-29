@@ -138,7 +138,6 @@ public class MainActivity extends Activity implements
 		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 		Thread thread = new Thread(new CheckTTSStillGoing());
 		thread.start();
-		// h.post(new CheckTTSStillGoing());
 	}
 	
 	class CheckTTSStillGoing implements Runnable {
@@ -146,13 +145,12 @@ public class MainActivity extends Activity implements
 		@Override
 		public void run() {
 
-			int i = 0;
+			double i = 0;
 			
 			while (true) {
 				if (!tts.isSpeaking())
 					break;
-				eyesIn.calcEye(i, i);
-				// eyesIn.invalidate();
+				eyesIn.moveEye(i*0.01);
 				h.post(new Runnable() {
 
 					@Override
@@ -160,8 +158,8 @@ public class MainActivity extends Activity implements
 						eyesIn.invalidate();
 					}
 				});
-				i++;
-				if (i > 500)
+				i=i+0.5;
+				if (i > 2000)
 					i = 0;
 			}
 			Log.e("TTS", "speak finished");
