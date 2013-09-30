@@ -148,12 +148,13 @@ public class MainActivity extends Activity implements
 		public void run() {
 
 			double i = 0;
+			double j = 0;
 			
 			while (true) {
 				if (!tts.isSpeaking())
 					break;
 				eyesIn.moveEye(i*0.01);
-				mouth.mouthSpeaking(i*0.01);
+				mouth.mouthSpeaking(j*0.01);
 				h.post(new Runnable() {
 
 					@Override
@@ -163,8 +164,11 @@ public class MainActivity extends Activity implements
 					}
 				});
 				i=i+0.5;
+				j=j+0.005;
 				if (i > 3000)
 					i = 0;
+				if (j > 3000)
+					j = 0;
 			}
 			Log.e("TTS", "speak finished");
 		}

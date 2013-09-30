@@ -84,10 +84,7 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 	public void mouthSpeaking(double i){
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
-		valueY = (int) (h/4 + i);
-		if(valueY >= h/6){
-			valueY = (int) (h/4 - i);
-		}
+		valueY = (int) (h/(4 + i));
 	}
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
