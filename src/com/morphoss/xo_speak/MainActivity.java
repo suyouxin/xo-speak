@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
 	private eyeInLayout eyesIn;
+	private MouthLayout mouth;
 	private Handler h = new Handler();
 	
 	@SuppressLint("ServiceCast")
@@ -47,6 +48,7 @@ public class MainActivity extends Activity implements
 		txtBox = (EditText) findViewById(R.id.editText);
 
 		eyesIn = (eyeInLayout)findViewById(R.id.eyeIn);
+		mouth = (MouthLayout) findViewById(R.id.mouth);
 		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
@@ -151,15 +153,17 @@ public class MainActivity extends Activity implements
 				if (!tts.isSpeaking())
 					break;
 				eyesIn.moveEye(i*0.01);
+				mouth.mouthSpeaking(i*0.01);
 				h.post(new Runnable() {
 
 					@Override
 					public void run() {
 						eyesIn.invalidate();
+						mouth.invalidate();
 					}
 				});
 				i=i+0.5;
-				if (i > 2000)
+				if (i > 3000)
 					i = 0;
 			}
 			Log.e("TTS", "speak finished");
