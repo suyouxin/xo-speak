@@ -7,7 +7,7 @@
     <string name="language_prompt">Language</string>
     <string name="default_language">Default</string>
     <string name="start">Start</string>
-    <string name="start2">Different moves</string>
-    <string name="start3">Rotate</string>
+    <string name="setpitch">Pitch :</string>
+    <string name="setspeed">Speed :</string>
 
 </resources>

@@ -4,45 +4,93 @@
     android:background="@drawable/background"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:background="@android:color/background_dark" >
+
+        <Spinner
+            android:id="@+id/spinnerLanguage"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:prompt="@string/language_prompt" />
+
+        <TextView
+            android:id="@+id/set_pitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="150dp"
+            android:text="@string/setpitch"
+            android:textColor="@android:color/white" />
+
+        <SeekBar
+            android:id="@+id/pitchSlider"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="20"
+            android:progress="5" />
+
+        <TextView
+            android:id="@+id/set_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="150dp"
+            android:text="@string/setspeed"
+            android:textColor="@android:color/white" />
+
+        <SeekBar
+            android:id="@+id/speedSlider"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="300dp"
+            android:max="20"
+            android:progress="5" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/face"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="14"
+        android:orientation="vertical" >
+
+        <com.morphoss.xo_speak.views.eyeOutLayout
+            android:id="@+id/eyeOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <com.morphoss.xo_speak.views.eyeInLayout
+            android:id="@+id/eyeIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+        <com.morphoss.xo_speak.views.MouthLayout
+            android:id="@+id/mouth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/textBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_weight="2" >
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true" />
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/face"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <com.morphoss.xo_speak.views.eyeOutLayout
-            android:id="@+id/eyeOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.morphoss.xo_speak.views.eyeInLayout
-            android:id="@+id/eyeIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.morphoss.xo_speak.views.MouthLayout
-            android:id="@+id/mouth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/spinnerLanguage"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:prompt="@string/language_prompt" />
     </FrameLayout>
 
 </LinearLayout>

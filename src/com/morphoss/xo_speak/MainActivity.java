@@ -3,25 +3,28 @@ package com.morphoss.xo_speak;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.morphoss.xo_speak.views.MouthLayout;
-import com.morphoss.xo_speak.views.eyeInLayout;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.morphoss.xo_speak.views.MouthLayout;
+import com.morphoss.xo_speak.views.eyeInLayout;
 
 public class MainActivity extends Activity implements
 		TextToSpeech.OnInitListener {
@@ -34,8 +37,10 @@ public class MainActivity extends Activity implements
 	private static final String TAG = "MainActivity";
 	private eyeInLayout eyesIn;
 	private MouthLayout mouth;
+	private SeekBar pitchSlider, speedSlider;
+	private TextView mSetPitch, mSetSpeed;
 	private Handler h = new Handler();
-	
+
 	@SuppressLint("ServiceCast")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +51,16 @@ public class MainActivity extends Activity implements
 		
 		tts = new TextToSpeech(this, this);
 		txtBox = (EditText) findViewById(R.id.editText);
-
+		pitchSlider = (SeekBar) findViewById(R.id.pitchSlider);
+		mSetPitch = (TextView) findViewById(R.id.set_pitch);
+		mSetSpeed = (TextView) findViewById(R.id.set_speed);
+		speedSlider = (SeekBar) findViewById(R.id.speedSlider);
 		eyesIn = (eyeInLayout)findViewById(R.id.eyeIn);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
+		
+		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
+		speedSlider.setOnSeekBarChangeListener(new speedListener());
+                       
 		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
@@ -81,6 +93,47 @@ public class MainActivity extends Activity implements
 		});
 	}
 
+	private class pitchListener implements SeekBar.OnSeekBarChangeListener {
+
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                boolean fromUser) {
+                            // Log the progress
+            Log.d("DEBUG", "Progress is: "+progress);
+                            //set textView's text
+            mSetPitch.setText(""+progress);
+        }
+
+        public void onStartTrackingTouch(SeekBar seekBar) {}
+
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        	mSetPitch.setText(R.string.setpitch);
+        	double pitch = (pitchSlider.getProgress() + 1);
+            pitch = pitch / 10;
+            tts.setPitch((float)pitch);
+        }
+
+    }
+
+	private class speedListener implements SeekBar.OnSeekBarChangeListener {
+
+        public void onProgressChanged(SeekBar seekBar, int progress,
+                boolean fromUser) {
+                            // Log the progress
+            Log.d("DEBUG", "Progress is: "+progress);
+                            //set textView's text
+            mSetSpeed.setText(""+progress);
+        }
+
+        public void onStartTrackingTouch(SeekBar seekBar) {}
+
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        	mSetSpeed.setText(R.string.setspeed);
+        	double speed = (speedSlider.getProgress() + 1);
+            speed = speed / 10;
+            tts.setSpeechRate((float) speed);
+        }
+
+    }
 	@Override
 	public void onDestroy() {
 		// shutdown the tts when the activity is destroyed
@@ -93,7 +146,7 @@ public class MainActivity extends Activity implements
 
 	@Override
 	public void onInit(int status) {
-		
+
 		if (status == TextToSpeech.SUCCESS) {
 			// set language of the tablet as default language
 			int result = tts.setLanguage(Locale.getDefault());
@@ -105,20 +158,23 @@ public class MainActivity extends Activity implements
 				}
 			}
 
-			String defaultLanguage = getResources().getString(R.string.default_language);
-			localeNames.add(defaultLanguage );
-			for(int i=0; i<localeList.size(); i++){
-				if(localeList.get(i).getLanguage().equals(localeList.get(i).toString())){
+			String defaultLanguage = getResources().getString(
+					R.string.default_language);
+			localeNames.add(defaultLanguage);
+			for (int i = 0; i < localeList.size(); i++) {
+				if (localeList.get(i).getLanguage()
+						.equals(localeList.get(i).toString())) {
 					localeNames.add(localeList.get(i).getDisplayLanguage());
 				}
 			}
 			spinnerLanguage = new Spinner(this);
-		    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-		            this, android.R.layout.simple_spinner_item, localeNames);
-		    spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+			ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+					this, android.R.layout.simple_spinner_item, localeNames);
+			spinnerArrayAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		    spinnerLanguage = (Spinner) findViewById( R.id.spinnerLanguage);
-		    spinnerLanguage.setAdapter(spinnerArrayAdapter);
+			spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
+			spinnerLanguage.setAdapter(spinnerArrayAdapter);
 
 			if (result == TextToSpeech.LANG_MISSING_DATA
 					|| result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -133,7 +189,6 @@ public class MainActivity extends Activity implements
 		}
 	}
 
-    
 	private void repeatText() {
 
 		String text = txtBox.getText().toString();
@@ -141,20 +196,20 @@ public class MainActivity extends Activity implements
 		Thread thread = new Thread(new CheckTTSStillGoing());
 		thread.start();
 	}
-	
+
 	class CheckTTSStillGoing implements Runnable {
-		
+
 		@Override
 		public void run() {
 
 			double i = 0;
 			double j = 0;
-			
+
 			while (true) {
 				if (!tts.isSpeaking())
 					break;
-				eyesIn.moveEye(i*0.01);
-				mouth.mouthSpeaking(j*0.01);
+				eyesIn.moveEye(i * 0.01);
+				mouth.mouthSpeaking(j * 0.01);
 				h.post(new Runnable() {
 
 					@Override
@@ -163,8 +218,8 @@ public class MainActivity extends Activity implements
 						mouth.invalidate();
 					}
 				});
-				i=i+0.5;
-				j=j+0.005;
+				i = i + 0.5;
+				j = j + 0.005;
 				if (i > 3000)
 					i = 0;
 				if (j > 3000)
@@ -172,9 +227,8 @@ public class MainActivity extends Activity implements
 			}
 			Log.e("TTS", "speak finished");
 		}
-		
-	}
 
+	}
 
 	public void addListenerOnSpinnerItemSelection() {
 		spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
@@ -185,8 +239,5 @@ public class MainActivity extends Activity implements
 	public static TextToSpeech getTts() {
 		return tts;
 	}
-
-	
-  
 
 }
