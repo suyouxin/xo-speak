@@ -48,41 +48,39 @@ public class MainActivity extends Activity implements
 		setContentView(R.layout.activity_main);
 		localeList.clear();
 		localeNames.clear();
-		
+
 		tts = new TextToSpeech(this, this);
 		txtBox = (EditText) findViewById(R.id.editText);
 		pitchSlider = (SeekBar) findViewById(R.id.pitchSlider);
 		mSetPitch = (TextView) findViewById(R.id.set_pitch);
 		mSetSpeed = (TextView) findViewById(R.id.set_speed);
 		speedSlider = (SeekBar) findViewById(R.id.speedSlider);
-		eyesIn = (eyeInLayout)findViewById(R.id.eyeIn);
+		eyesIn = (eyeInLayout) findViewById(R.id.eyeIn);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
-		
+
 		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
 		speedSlider.setOnSeekBarChangeListener(new speedListener());
-                       
+
 		addListenerOnSpinnerItemSelection();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);		
-		
-		
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 		txtBox.setOnKeyListener(new OnKeyListener() {
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				Log.d(TAG, "Key pressed on "+v.getClass().toString());
+				Log.d(TAG, "Key pressed on " + v.getClass().toString());
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
-						InputMethodManager imm = (InputMethodManager)getSystemService(
-							      Context.INPUT_METHOD_SERVICE);
-							imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
-							h.postDelayed(new Runnable() {
-					            public void run() {
-					            	repeatText();
-					            }
-					        }, 1000);
-						
+						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
+						h.postDelayed(new Runnable() {
+							public void run() {
+								repeatText();
+							}
+						}, 1000);
+
 						return true;
 					default:
 						break;
@@ -95,45 +93,51 @@ public class MainActivity extends Activity implements
 
 	private class pitchListener implements SeekBar.OnSeekBarChangeListener {
 
-        public void onProgressChanged(SeekBar seekBar, int progress,
-                boolean fromUser) {
-                            // Log the progress
-            Log.d("DEBUG", "Progress is: "+progress);
-                            //set textView's text
-            mSetPitch.setText(""+progress);
-        }
+		public void onProgressChanged(SeekBar seekBar, int progress,
+				boolean fromUser) {
+			double max = 20;
+			// Log the progress
+			Log.d("DEBUG", "Progress is: " + 100 * progress / max);
+			// set textView's text
+			mSetPitch.setText("" + 100 * progress / max + "%");
+		}
 
-        public void onStartTrackingTouch(SeekBar seekBar) {}
+		public void onStartTrackingTouch(SeekBar seekBar) {
+		}
 
-        public void onStopTrackingTouch(SeekBar seekBar) {
-        	mSetPitch.setText(R.string.setpitch);
-        	double pitch = (pitchSlider.getProgress() + 1);
-            pitch = pitch / 10;
-            tts.setPitch((float)pitch);
-        }
+		public void onStopTrackingTouch(SeekBar seekBar) {
+			mSetPitch.setText(R.string.setpitch);
+			double pitch = (pitchSlider.getProgress() + 1);
+			pitch = pitch / 10;
+			tts.setPitch((float) pitch);
+		}
 
-    }
+	}
 
 	private class speedListener implements SeekBar.OnSeekBarChangeListener {
 
-        public void onProgressChanged(SeekBar seekBar, int progress,
-                boolean fromUser) {
-                            // Log the progress
-            Log.d("DEBUG", "Progress is: "+progress);
-                            //set textView's text
-            mSetSpeed.setText(""+progress);
-        }
+		public void onProgressChanged(SeekBar seekBar, int progress,
+				boolean fromUser) {
 
-        public void onStartTrackingTouch(SeekBar seekBar) {}
+			double max = 50;
+			// Log the progress
+			Log.d("DEBUG", "Progress is: " + 100 * progress / max);
+			// set textView's text
+			mSetSpeed.setText("" + 100 * progress / max + "%");
+		}
 
-        public void onStopTrackingTouch(SeekBar seekBar) {
-        	mSetSpeed.setText(R.string.setspeed);
-        	double speed = (speedSlider.getProgress() + 1);
-            speed = speed / 10;
-            tts.setSpeechRate((float) speed);
-        }
+		public void onStartTrackingTouch(SeekBar seekBar) {
+		}
 
-    }
+		public void onStopTrackingTouch(SeekBar seekBar) {
+			mSetSpeed.setText(R.string.setspeed);
+			double speed = (speedSlider.getProgress() + 1);
+			speed = speed / 10;
+			tts.setSpeechRate((float) speed);
+		}
+
+	}
+
 	@Override
 	public void onDestroy() {
 		// shutdown the tts when the activity is destroyed
