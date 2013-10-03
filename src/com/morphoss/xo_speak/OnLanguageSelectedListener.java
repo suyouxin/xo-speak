@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class CustomOnItemSelectedListener implements OnItemSelectedListener {
+public class OnLanguageSelectedListener implements OnItemSelectedListener {
 
 	private static final String TAG = "CustomOnItemSelectedListener";
 	

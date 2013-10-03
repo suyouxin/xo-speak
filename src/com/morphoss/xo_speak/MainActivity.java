@@ -6,18 +6,20 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -27,19 +29,20 @@ import com.morphoss.xo_speak.views.MouthLayout;
 import com.morphoss.xo_speak.views.eyeInLayout;
 
 public class MainActivity extends Activity implements
-		TextToSpeech.OnInitListener {
+		TextToSpeech.OnInitListener, TextWatcher {
 
 	private static TextToSpeech tts;
-	private EditText txtBox;
-	private Spinner spinnerLanguage;
+	private AutoCompleteTextView txtBox;
+	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle;
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
 	private eyeInLayout eyesIn;
 	private MouthLayout mouth;
 	private SeekBar pitchSlider, speedSlider;
-	private TextView mSetPitch, mSetSpeed;
+	private TextView mSetPitch, mSetSpeed,textSavedMem1;
 	private Handler h = new Handler();
+	private ArrayList<String> item;
 
 	@SuppressLint("ServiceCast")
 	@Override
@@ -50,18 +53,22 @@ public class MainActivity extends Activity implements
 		localeNames.clear();
 
 		tts = new TextToSpeech(this, this);
-		txtBox = (EditText) findViewById(R.id.editText);
+		txtBox = (AutoCompleteTextView) findViewById(R.id.autocompleteText);
+		
 		pitchSlider = (SeekBar) findViewById(R.id.pitchSlider);
 		mSetPitch = (TextView) findViewById(R.id.set_pitch);
 		mSetSpeed = (TextView) findViewById(R.id.set_speed);
 		speedSlider = (SeekBar) findViewById(R.id.speedSlider);
 		eyesIn = (eyeInLayout) findViewById(R.id.eyeIn);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
+		textSavedMem1 = (TextView)findViewById(R.id.savedmem1);
 
 		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
 		speedSlider.setOnSeekBarChangeListener(new speedListener());
 
-		addListenerOnSpinnerItemSelection();
+		addListenerOnSpinnerLanguage();
+		addListenerOnSpinnerEyes();
+		addListenerOnSpinnerMouthStyle();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -73,6 +80,8 @@ public class MainActivity extends Activity implements
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
+						SavePreferences("MEM1", txtBox.getText().toString());
+						LoadPreferences();
 						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 						imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
 						h.postDelayed(new Runnable() {
@@ -89,8 +98,25 @@ public class MainActivity extends Activity implements
 				return false;
 			}
 		});
+		LoadPreferences();
 	}
-
+	   private void SavePreferences(String key, String value){
+		    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+		    SharedPreferences.Editor editor = sharedPreferences.edit();
+		    editor.putString(key, value);
+		    editor.commit();
+		   }
+		  
+		   private void LoadPreferences(){
+		    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+		    String strSavedMem1 = sharedPreferences.getString("MEM1", "");
+		    if(item!=null){
+		    item.add(strSavedMem1);
+		    txtBox.addTextChangedListener(this);
+		    txtBox.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,item));
+		    }
+		    textSavedMem1.setText(strSavedMem1);
+		   }
 	private class pitchListener implements SeekBar.OnSeekBarChangeListener {
 
 		public void onProgressChanged(SeekBar seekBar, int progress,
@@ -213,7 +239,7 @@ public class MainActivity extends Activity implements
 				if (!tts.isSpeaking())
 					break;
 				eyesIn.moveEye(i * 0.01);
-				mouth.mouthSpeaking(j * 0.01);
+				mouth.mouthSpeaking(j * 0.001);
 				h.post(new Runnable() {
 
 					@Override
@@ -234,14 +260,37 @@ public class MainActivity extends Activity implements
 
 	}
 
-	public void addListenerOnSpinnerItemSelection() {
+	public void addListenerOnSpinnerLanguage() {
 		spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
 		spinnerLanguage
-				.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+				.setOnItemSelectedListener(new OnLanguageSelectedListener());
+	}
+	public void addListenerOnSpinnerEyes() {
+		spinnerNumberEyes = (Spinner) findViewById(R.id.spinnerNumberEyes);
+		spinnerNumberEyes
+				.setOnItemSelectedListener(new OnNumberEyesSelectedListener());
 	}
 
+	public void addListenerOnSpinnerMouthStyle() {
+		spinnerMouthStyle = (Spinner) findViewById(R.id.spinnerMouthStyle);
+		spinnerMouthStyle
+				.setOnItemSelectedListener(new OnMouthStyleSelectedListener());
+	}
 	public static TextToSpeech getTts() {
 		return tts;
+	}
+	@Override
+	public void afterTextChanged(Editable s) {
+		
+	}
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		
+	}
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		
 	}
 
 }

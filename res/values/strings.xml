@@ -5,9 +5,24 @@
     <string name="action_settings">Settings</string>
     <string name="textTitle">Text To Speech</string>
     <string name="language_prompt">Language</string>
-    <string name="default_language">Default</string>
+    <string name="number_eyes__prompt">Number of eyes</string>
+    <string name="mouth_style__prompt">Mouth Style</string>
+    <string name="default_language">Default language</string>
     <string name="start">Start</string>
     <string name="setpitch">Pitch :</string>
     <string name="setspeed">Speed :</string>
+
+    <string-array name="number_eyes">
+        <item>Two</item>
+        <item>One</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+    </string-array>
+    <string-array name="mouth_style">
+        <item>Simple style</item>
+        <item>Waveform</item>
+        <item>Frequency</item>
+    </string-array>
 
 </resources>

@@ -38,12 +38,12 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 		pOut.setStrokeWidth(4.0f);
 		int w1 = width+height;
 		int w2 = width-height;
-		int r1 = width/18;
-		int r2 = width/18;
-		canvas.drawCircle(width+height, height, width/5, pIn);
-		canvas.drawCircle(width+height, height,width/5, pOut);
-		canvas.drawCircle(width-height, height, width/5, pIn);
-		canvas.drawCircle(width-height, height, width/5, pOut);
+		int r1 = width/19;
+		int r2 = width/19;
+		canvas.drawCircle(width+height, height, width/6, pIn);
+		canvas.drawCircle(width+height, height,width/6, pOut);
+		canvas.drawCircle(width-height, height, width/6, pIn);
+		canvas.drawCircle(width-height, height, width/6, pOut);
 	}
 
     @Override

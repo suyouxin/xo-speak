@@ -52,7 +52,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		int height = this.getHeight()/4;
 		p.setColor(Color.BLACK);
 		p.setStyle(Paint.Style.FILL); 
-		int radius = width/18;
+		int radius = width/19;
 		canvas.drawCircle(mEye1X, mEye1Y,radius, p);
 		canvas.drawCircle(mEye2X, mEye2Y, radius, p);
 	}
@@ -78,7 +78,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
     public void calcEye(int touchX, int touchY) {
     	int width = this.getMeasuredWidth()/2;
 		int height = this.getMeasuredHeight()/4;
-		int radius = width/8;
+		int radius = width/10;
     	
 		int X1 = width+height;
 		int Y1 = height;
