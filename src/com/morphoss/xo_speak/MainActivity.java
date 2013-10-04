@@ -20,13 +20,13 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.morphoss.xo_speak.views.MouthLayout;
 import com.morphoss.xo_speak.views.eyeInLayout;
+import com.morphoss.xo_speak.views.eyeOutLayout;
 
 public class MainActivity extends Activity implements
 		TextToSpeech.OnInitListener, TextWatcher {
@@ -37,6 +37,7 @@ public class MainActivity extends Activity implements
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
+	private eyeOutLayout eyesOut;
 	private eyeInLayout eyesIn;
 	private MouthLayout mouth;
 	private SeekBar pitchSlider, speedSlider;
@@ -60,6 +61,7 @@ public class MainActivity extends Activity implements
 		mSetSpeed = (TextView) findViewById(R.id.set_speed);
 		speedSlider = (SeekBar) findViewById(R.id.speedSlider);
 		eyesIn = (eyeInLayout) findViewById(R.id.eyeIn);
+		eyesOut = (eyeOutLayout) findViewById(R.id.eyeOut);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
 		textSavedMem1 = (TextView)findViewById(R.id.savedmem1);
 
@@ -268,7 +270,7 @@ public class MainActivity extends Activity implements
 	public void addListenerOnSpinnerEyes() {
 		spinnerNumberEyes = (Spinner) findViewById(R.id.spinnerNumberEyes);
 		spinnerNumberEyes
-				.setOnItemSelectedListener(new OnNumberEyesSelectedListener());
+				.setOnItemSelectedListener(new OnNumberEyesSelectedListener(eyesOut, eyesIn));
 	}
 
 	public void addListenerOnSpinnerMouthStyle() {

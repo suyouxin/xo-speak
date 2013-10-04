@@ -1,5 +1,7 @@
 package com.morphoss.xo_speak.views;
 
+import com.morphoss.xo_speak.OnNumberEyesSelectedListener;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,10 +17,22 @@ import android.view.SurfaceHolder;
 import android.view.View;
 
 public class eyeInLayout extends View implements SurfaceHolder.Callback {
-	private int mEye1X;
-	private int mEye1Y;
-	private int mEye2X;
-	private int mEye2Y;
+	private int mEyeY;
+	private int mEye1;
+	private int mEye21;
+	private int mEye22;
+	private int mEye31;
+	private int mEye32;
+	private int mEye33;
+	private int mEye41;
+	private int mEye42;
+	private int mEye43;
+	private int mEye44;
+	private int mEye51;
+	private int mEye52;
+	private int mEye53;
+	private int mEye54;
+	private int mEye55;
 	public static final String TAG = "eyeInLayout";
 	
 	private Paint p = new Paint();
@@ -37,24 +51,67 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		int width = this.getMeasuredWidth()/2;
-		int height = this.getMeasuredHeight()/4;
-		mEye1X = width+height;
-		mEye1Y = (int) (1.2*height);
-		mEye2X = width-height;
-		mEye2Y = (int) (1.2*height);
-		Log.d(TAG,"eyeInLayout onMeasure w: " + width + " h: " + height);
+		int w = this.getMeasuredWidth()/2;
+		int h = this.getMeasuredHeight()/4;
+		mEyeY = (int) (1.2*h);
+		mEye1 = w;
+		mEye21 = w+h;
+		mEye22 = w-h;
+		mEye31 = w-2*h;
+		mEye32 = w;
+		mEye33 = w+2*h;
+		mEye41 = w-3*h;
+		mEye42 = w-h;
+		mEye43 = w+h;
+		mEye44 = w+3*h;	
+		mEye51 = w-3*h;
+		mEye52 = (int) (w-1.5*h);
+		mEye53 = w;
+		mEye54 = (int) (w+1.5*h);
+		mEye55 = w+3*h;
+		Log.d(TAG,"eyeInLayout onMeasure w: " + w + " h: " + h);
 	}
 	@Override
 	protected void onDraw(Canvas canvas) {
 		// smooths
-		int width = this.getWidth()/2;
-		int height = this.getHeight()/4;
+		int w = this.getWidth()/2;
+		int h = this.getHeight()/4;
 		p.setColor(Color.BLACK);
 		p.setStyle(Paint.Style.FILL); 
-		int radius = width/19;
-		canvas.drawCircle(mEye1X, mEye1Y,radius, p);
-		canvas.drawCircle(mEye2X, mEye2Y, radius, p);
+		int r = w/19;
+		Log.d(TAG, "number of eyes inside : "+OnNumberEyesSelectedListener.numberEyes);
+		if(OnNumberEyesSelectedListener.numberEyes == 1){
+			//one eye
+			canvas.drawCircle(mEye1, mEyeY, r, p);
+		}
+		if(OnNumberEyesSelectedListener.numberEyes == 2){
+			//two eyes
+			canvas.drawCircle(mEye21, mEyeY, r, p);
+			canvas.drawCircle(mEye22, mEyeY,r, p);
+		}	
+		if(OnNumberEyesSelectedListener.numberEyes == 3){
+			//three eyes
+			canvas.drawCircle(mEye31, mEyeY, r, p);
+			canvas.drawCircle(mEye32, mEyeY,r, p);
+			canvas.drawCircle(mEye33, mEyeY, r, p);
+		}
+		if(OnNumberEyesSelectedListener.numberEyes == 4){
+			//four eyes
+			canvas.drawCircle(mEye41, mEyeY, r, p);
+			canvas.drawCircle(mEye42, mEyeY, r, p);
+			canvas.drawCircle(mEye43, mEyeY, r, p);
+			canvas.drawCircle(mEye44, mEyeY, r, p);
+		}
+		if(OnNumberEyesSelectedListener.numberEyes == 5){
+			//five eyes
+			int r2=(int) (r/1.2);
+			canvas.drawCircle(mEye51, mEyeY, r2, p);
+			canvas.drawCircle(mEye52, mEyeY, r2, p);
+			canvas.drawCircle(mEye53, mEyeY, r2, p);
+			canvas.drawCircle(mEye54, mEyeY, r2, p);
+			canvas.drawCircle(mEye55, mEyeY, r2, p);
+		}
+	
 	}
 	
 	@Override
@@ -93,10 +150,10 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		int projX2 = (int) (X2 + ((radius*(touchX-X2))/centerToPoint2));
 		int projY1 = (int) (Y1 + Math.sqrt(Math.pow(radius, 2) - Math.pow(projX1 - X1, 2)));
 		int projY2 = (int) (Y2 + Math.sqrt(Math.pow(radius, 2) - Math.pow(projX2 - X2, 2)));
-		mEye1X = projX1;
-		mEye1Y = projY1;
-		mEye2X = projX2;
-		mEye2Y = projY2;
+		mEye21 = projX1;
+		mEyeY = projY1;
+		mEye22 = projX2;
+		mEyeY = projY2;
 		}
 		if(Y1 > touchY){
 			Log.d(TAG,"Y1 > touchY, touchX > X1");
@@ -108,10 +165,10 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 			int projY4 = (int) (Y2 - Math.sqrt(Math.pow(radius, 2) - Math.pow(projX4 - X2, 2)));
 			Log.d(TAG,"X3 : "+projX3+" Y3 : "+projY3);
 			Log.d(TAG,"X4 : "+projX4+" Y4 : "+projY4);
-			mEye1X = projX3;
-			mEye1Y = projY3;
-			mEye2X = projX4;
-			mEye2Y = projY4;
+			mEye21 = projX3;
+			mEyeY = projY3;
+			mEye22 = projX4;
+			mEyeY = projY4;
 		}
 		
     }
@@ -125,15 +182,15 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 		int Y1 = height;
 		int X2 = width-height;
 		int Y2 = height;
-		mEye1Y = Y1;
-		mEye2Y = Y2;
-		mEye1X = X1;
-		mEye2X = X2;
-			mEye1Y += i;
-			mEye2Y += i;
-			if(mEye1Y >= Y1+radius || mEye2Y >= Y2+radius){
-				mEye1Y = Y1 - radius;
-				mEye2Y = Y2 - radius;
+		mEyeY = Y1;
+		mEyeY = Y2;
+		mEye21 = X1;
+		mEye22 = X2;
+			mEyeY += i;
+			mEyeY += i;
+			if(mEyeY >= Y1+radius || mEyeY >= Y2+radius){
+				mEyeY = Y1 - radius;
+				mEyeY = Y2 - radius;
 			}
     }
     @Override

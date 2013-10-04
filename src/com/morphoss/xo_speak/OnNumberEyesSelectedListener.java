@@ -1,20 +1,52 @@
 package com.morphoss.xo_speak;
 
+import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Toast;
 
-public class OnNumberEyesSelectedListener implements OnItemSelectedListener {
+import com.morphoss.xo_speak.views.eyeInLayout;
+import com.morphoss.xo_speak.views.eyeOutLayout;
 
+public class OnNumberEyesSelectedListener  extends Activity implements OnItemSelectedListener {
+
+	public static int numberEyes = 2;
+	private static final String TAG = "NumberEyesListener";
+	private eyeInLayout mEyesIn;
+	private eyeOutLayout mEyesOut;
+	
+	public OnNumberEyesSelectedListener(eyeOutLayout eyeOut, eyeInLayout eyeIn) {
+		mEyesOut = eyeOut;
+		mEyesIn = eyeIn;
+	}
+	
 	@Override
 	public void onItemSelected(AdapterView parent, View view, int pos, long id) {
-
-		/*Toast.makeText(
-				parent.getContext(),
-				"Number of eyes selected : "
-						+ parent.getItemAtPosition(pos).toString(),
-				Toast.LENGTH_SHORT).show();*/
+		
+		
+		if(parent.getItemAtPosition(pos).toString().contains("One")){
+			Log.d(TAG, "one eye selected");
+			numberEyes = 1;
+		}
+		if(parent.getItemAtPosition(pos).toString().contains("Two")){
+			Log.d(TAG, "two eyes selected");
+			numberEyes = 2;
+		}
+		if(parent.getItemAtPosition(pos).toString().contains("Three")){
+			Log.d(TAG, "three eyes selected");
+			numberEyes = 3;
+		}
+		if(parent.getItemAtPosition(pos).toString().contains("Four")){
+			Log.d(TAG, "four eyes selected");
+			numberEyes = 4;
+		}
+		if(parent.getItemAtPosition(pos).toString().contains("Five")){
+			Log.d(TAG, "five eyes selected");
+			numberEyes = 5;
+		}
+		mEyesOut.invalidate(); 
+		mEyesIn.invalidate();
 	}
 
 	@Override
