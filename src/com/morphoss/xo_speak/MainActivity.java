@@ -33,7 +33,7 @@ public class MainActivity extends Activity implements
 
 	private static TextToSpeech tts;
 	private AutoCompleteTextView txtBox;
-	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle;
+	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle, spinnerStyleEyes;
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
@@ -71,6 +71,7 @@ public class MainActivity extends Activity implements
 		addListenerOnSpinnerLanguage();
 		addListenerOnSpinnerEyes();
 		addListenerOnSpinnerMouthStyle();
+		addListenerOnSpinnerStyleEyes();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -277,6 +278,11 @@ public class MainActivity extends Activity implements
 		spinnerMouthStyle = (Spinner) findViewById(R.id.spinnerMouthStyle);
 		spinnerMouthStyle
 				.setOnItemSelectedListener(new OnMouthStyleSelectedListener());
+	}
+	public void addListenerOnSpinnerStyleEyes() {
+		spinnerStyleEyes = (Spinner) findViewById(R.id.spinnerStyleEyes);
+		spinnerStyleEyes
+				.setOnItemSelectedListener(new OnStyleEyesSelectedListener(eyesOut, eyesIn));
 	}
 	public static TextToSpeech getTts() {
 		return tts;

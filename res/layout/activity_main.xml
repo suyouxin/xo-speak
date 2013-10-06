@@ -13,10 +13,9 @@
 
         <Spinner
             android:id="@+id/spinnerLanguage"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="10dp"
             android:prompt="@string/language_prompt" />
 
         <TextView
@@ -24,16 +23,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="260dp"
+            android:layout_marginRight="305dp"
             android:text="@string/setpitch"
             android:textColor="@android:color/white" />
 
         <SeekBar
             android:id="@+id/pitchSlider"
-            android:layout_width="140dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="160dp"
+            android:layout_marginRight="220dp"
             android:max="20"
             android:progress="5" />
 
@@ -42,34 +41,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="125dp"
             android:text="@string/setspeed"
             android:textColor="@android:color/white" />
 
         <SeekBar
             android:id="@+id/speedSlider"
-            android:layout_width="140dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
             android:max="50"
             android:progress="5" />
 
         <Spinner
             android:id="@+id/spinnerNumberEyes"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|right"
-            android:layout_marginRight="190dp"
+            android:layout_marginRight="310dp"
             android:entries="@array/number_eyes"
             android:prompt="@string/number_eyes__prompt" />
 
         <Spinner
-            android:id="@+id/spinnerMouthStyle"
-            android:layout_width="180dp"
+            android:id="@+id/spinnerStyleEyes"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center|right"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="155dp"
+            android:entries="@array/style_eyes"
+            android:prompt="@string/style_eyes__prompt" />
+
+        <Spinner
+            android:id="@+id/spinnerMouthStyle"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
             android:entries="@array/mouth_style"
             android:prompt="@string/mouth_style__prompt" />
     </FrameLayout>
