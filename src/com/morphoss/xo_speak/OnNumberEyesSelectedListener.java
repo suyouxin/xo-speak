@@ -9,17 +9,16 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.morphoss.xo_speak.views.eyeInLayout;
 import com.morphoss.xo_speak.views.eyeOutLayout;
 
-public class OnNumberEyesSelectedListener  extends Activity implements OnItemSelectedListener {
+public class OnNumberEyesSelectedListener implements OnItemSelectedListener {
 
 	public static int numberEyes = 2;
 	private static final String TAG = "NumberEyesListener";
-	private eyeInLayout mEyesIn;
-	private eyeOutLayout mEyesOut;
+	private MainActivity mActivity;
 	
-	public OnNumberEyesSelectedListener(eyeOutLayout eyeOut, eyeInLayout eyeIn) {
-		mEyesOut = eyeOut;
-		mEyesIn = eyeIn;
+	public OnNumberEyesSelectedListener(MainActivity activity) {
+		mActivity = activity;
 	}
+	
 	
 	@Override
 	public void onItemSelected(AdapterView parent, View view, int pos, long id) {
@@ -45,8 +44,7 @@ public class OnNumberEyesSelectedListener  extends Activity implements OnItemSel
 			Log.d(TAG, "five eyes selected");
 			numberEyes = 5;
 		}
-		mEyesOut.invalidate(); 
-		mEyesIn.invalidate();
+		mActivity.refreshFace();
 	}
 
 	@Override

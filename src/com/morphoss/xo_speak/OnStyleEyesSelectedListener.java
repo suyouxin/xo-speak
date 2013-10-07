@@ -9,16 +9,14 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import com.morphoss.xo_speak.views.eyeInLayout;
 import com.morphoss.xo_speak.views.eyeOutLayout;
 
-public class OnStyleEyesSelectedListener extends Activity implements OnItemSelectedListener {
+public class OnStyleEyesSelectedListener implements OnItemSelectedListener {
 
-	public static int numberEyes = 2;
+	public static int shapeEyes = 1;
 	private static final String TAG = "StyleEyesListener";
-	private eyeInLayout mEyesIn;
-	private eyeOutLayout mEyesOut;
+	private MainActivity mActivity;
 	
-	public OnStyleEyesSelectedListener(eyeOutLayout eyeOut, eyeInLayout eyeIn) {
-		mEyesOut = eyeOut;
-		mEyesIn = eyeIn;
+	public OnStyleEyesSelectedListener(MainActivity activity) {
+		mActivity = activity;
 	}
 	
 	@Override
@@ -26,16 +24,15 @@ public class OnStyleEyesSelectedListener extends Activity implements OnItemSelec
 		
 		
 		if(parent.getItemAtPosition(pos).toString().contains("Round")){
-			eyeOutLayout.shapeEyes = 1;
+			shapeEyes = 1;
 		}
 		if(parent.getItemAtPosition(pos).toString().contains("Square")){
-			eyeOutLayout.shapeEyes = 2;
+			shapeEyes = 2;
 		}
 		if(parent.getItemAtPosition(pos).toString().contains("Glasses")){
-			eyeOutLayout.shapeEyes = 3;
+			shapeEyes = 3;
 		}
-		mEyesOut.invalidate(); 
-		mEyesIn.invalidate();
+		mActivity.refreshFace();
 	}
 
 	@Override

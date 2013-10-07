@@ -222,6 +222,14 @@ public class MainActivity extends Activity implements
 		}
 	}
 
+	public void refreshFace() {
+		int numberEyes = OnNumberEyesSelectedListener.numberEyes;
+		int shapeEyes = OnStyleEyesSelectedListener.shapeEyes;
+		eyesOut.createEyes(numberEyes, shapeEyes);
+		eyesOut.invalidate(); 
+		eyesIn.invalidate();
+	}
+	
 	private void repeatText() {
 
 		String text = txtBox.getText().toString();
@@ -262,7 +270,7 @@ public class MainActivity extends Activity implements
 		}
 
 	}
-
+	
 	public void addListenerOnSpinnerLanguage() {
 		spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
 		spinnerLanguage
@@ -271,7 +279,7 @@ public class MainActivity extends Activity implements
 	public void addListenerOnSpinnerEyes() {
 		spinnerNumberEyes = (Spinner) findViewById(R.id.spinnerNumberEyes);
 		spinnerNumberEyes
-				.setOnItemSelectedListener(new OnNumberEyesSelectedListener(eyesOut, eyesIn));
+				.setOnItemSelectedListener(new OnNumberEyesSelectedListener(this));
 	}
 
 	public void addListenerOnSpinnerMouthStyle() {
@@ -282,7 +290,7 @@ public class MainActivity extends Activity implements
 	public void addListenerOnSpinnerStyleEyes() {
 		spinnerStyleEyes = (Spinner) findViewById(R.id.spinnerStyleEyes);
 		spinnerStyleEyes
-				.setOnItemSelectedListener(new OnStyleEyesSelectedListener(eyesOut, eyesIn));
+				.setOnItemSelectedListener(new OnStyleEyesSelectedListener(this));
 	}
 	public static TextToSpeech getTts() {
 		return tts;
