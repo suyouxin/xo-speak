@@ -1,8 +1,10 @@
-package com.morphoss.xo_speak.layout;
+package com.morphoss.xo_speak.coordinates;
 
 import java.util.ArrayList;
 
-public 	class EyeAlgorithmForFive extends EyeAlgorithm {
+import com.morphoss.xo_speak.layout.EyeOutside;
+
+public 	class EyeCoordinatesForFive extends EyeInitCoordinates {
 	@Override
 	public void calc(ArrayList<EyeOutside> eyes, int canvasWidth, int canvasHeight) {
 		super.calc(eyes, canvasWidth, canvasHeight);

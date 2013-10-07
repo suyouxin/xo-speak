@@ -8,12 +8,12 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.View;
 
-import com.morphoss.xo_speak.layout.EyeAlgorithm;
-import com.morphoss.xo_speak.layout.EyeAlgorithmForFive;
-import com.morphoss.xo_speak.layout.EyeAlgorithmForFour;
-import com.morphoss.xo_speak.layout.EyeAlgorithmForOne;
-import com.morphoss.xo_speak.layout.EyeAlgorithmForThree;
-import com.morphoss.xo_speak.layout.EyeAlgorithmForTwo;
+import com.morphoss.xo_speak.coordinates.EyeCoordinatesForFive;
+import com.morphoss.xo_speak.coordinates.EyeCoordinatesForFour;
+import com.morphoss.xo_speak.coordinates.EyeCoordinatesForOne;
+import com.morphoss.xo_speak.coordinates.EyeCoordinatesForThree;
+import com.morphoss.xo_speak.coordinates.EyeCoordinatesForTwo;
+import com.morphoss.xo_speak.coordinates.EyeInitCoordinates;
 import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.layout.EyeShapeCircle;
 import com.morphoss.xo_speak.layout.EyeShapeSquare;
@@ -21,63 +21,65 @@ import com.morphoss.xo_speak.layout.EyeShapeSquare;
 public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 
 	
-	ArrayList<EyeOutside> mEyeballs;
-	ArrayList<EyeAlgorithm> mAlgorithms;
+	ArrayList<EyeOutside> mEyeOutside;
+	ArrayList<EyeInitCoordinates> mCoordinates;
 	
 	private static final String TAG = "eyeOutLayout";
+	//by default the shape of the eyes is "Round"
 	public static int shapeEyes = 1;
 	
 	public eyeOutLayout(Context context) {
 		super(context);
-		initAlgorithms();
+		initCoordinates();
 	}
 	
 	public eyeOutLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		initAlgorithms();
+		initCoordinates();
 	}
 	public eyeOutLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		initAlgorithms();
+		initCoordinates();
 	}
 	
-	public void initAlgorithms() {
-		mAlgorithms = new ArrayList<EyeAlgorithm>();
-		mAlgorithms.add(new EyeAlgorithmForOne());
-		mAlgorithms.add(new EyeAlgorithmForTwo());
-		mAlgorithms.add(new EyeAlgorithmForThree());
-		mAlgorithms.add(new EyeAlgorithmForFour());
-		mAlgorithms.add(new EyeAlgorithmForFive());
+	public void initCoordinates() {
+		mCoordinates = new ArrayList<EyeInitCoordinates>();
+		mCoordinates.add(new EyeCoordinatesForOne());
+		mCoordinates.add(new EyeCoordinatesForTwo());
+		mCoordinates.add(new EyeCoordinatesForThree());
+		mCoordinates.add(new EyeCoordinatesForFour());
+		mCoordinates.add(new EyeCoordinatesForFive());
 	}
 	
 	public ArrayList<EyeOutside> createEyes(int numberEyes, int style) {
 		ArrayList<EyeOutside> eyes = new ArrayList<EyeOutside>();
 		
 		for (int i = 0; i < numberEyes; i++) {
-			// circle
 			EyeOutside eye = null;
 			if (style == 1) {
+				//shape = round
 				eye = new EyeShapeCircle();
 			}
 			else if (style == 2) {
+				//shape = square
 				eye = new EyeShapeSquare();
 			}
 			eyes.add(eye);
 		}
 		calcEyePosition(eyes);
-		mEyeballs = eyes;
+		mEyeOutside = eyes;
 		return eyes;
 	}
 	
 	public void calcEyePosition(ArrayList<EyeOutside> eyes) {
-		EyeAlgorithm currentAlgorithm = mAlgorithms.get(eyes.size() - 1);
-		currentAlgorithm.calc(eyes, this.getWidth(), this.getHeight());
+		EyeInitCoordinates currentCoordinates = mCoordinates.get(eyes.size() - 1);
+		currentCoordinates.calc(eyes, this.getWidth(), this.getHeight());
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		
-		for (EyeOutside eyeball : mEyeballs) {
+		for (EyeOutside eyeball : mEyeOutside) {
 			eyeball.draw(canvas);
 		}
 	}

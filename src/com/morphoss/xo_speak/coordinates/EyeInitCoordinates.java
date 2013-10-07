@@ -1,8 +1,10 @@
-package com.morphoss.xo_speak.layout;
+package com.morphoss.xo_speak.coordinates;
 
 import java.util.ArrayList;
 
-public class EyeAlgorithm {
+import com.morphoss.xo_speak.layout.EyeOutside;
+
+public class EyeInitCoordinates {
 	int w;
 	int h;
 	int r;
