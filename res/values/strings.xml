@@ -23,7 +23,6 @@
     <string-array name="style_eyes">
         <item>Round</item>
         <item>Square</item>
-        <item>Glasses</item>
     </string-array>
     <string-array name="mouth_style">
         <item>Simple style</item>

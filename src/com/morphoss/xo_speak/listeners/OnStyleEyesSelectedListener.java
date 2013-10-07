@@ -1,4 +1,4 @@
-package com.morphoss.xo_speak;
+package com.morphoss.xo_speak.listeners;
 
 import android.app.Activity;
 import android.util.Log;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.morphoss.xo_speak.MainActivity;
 import com.morphoss.xo_speak.views.eyeInLayout;
 import com.morphoss.xo_speak.views.eyeOutLayout;
 

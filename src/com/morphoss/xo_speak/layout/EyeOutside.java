@@ -1,14 +1,14 @@
-package com.morphoss.xo_speak;
+package com.morphoss.xo_speak.layout;
 
 import android.graphics.Canvas;
 
-public class EyeBall {
+public class EyeOutside {
 		public int centerX;
 		public int centerY;
 		
 		public int radius;
 		
-		public EyeBall() {
+		public EyeOutside() {
 			
 		}
 		

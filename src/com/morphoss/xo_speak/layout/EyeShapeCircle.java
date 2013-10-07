@@ -1,12 +1,12 @@
-package com.morphoss.xo_speak;
+package com.morphoss.xo_speak.layout;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class EyeBallCircle extends EyeBall {
+public class EyeShapeCircle extends EyeOutside {
 	
-	public EyeBallCircle() {
+	public EyeShapeCircle() {
 		
 	}
 

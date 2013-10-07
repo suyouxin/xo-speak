@@ -1,6 +1,6 @@
 package com.morphoss.xo_speak.views;
 
-import com.morphoss.xo_speak.OnNumberEyesSelectedListener;
+import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
 
 import android.content.Context;
 import android.graphics.Canvas;
