@@ -5,6 +5,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 public class EyeInside extends EyeOutside {
+	public int ballX;
+	public int ballY;
+	
+	public int ballRadius;
 	
 	public EyeInside() {
 		
@@ -16,6 +20,6 @@ public class EyeInside extends EyeOutside {
 
 		p.setColor(Color.BLACK);
 		p.setStyle(Paint.Style.FILL);
-		canvas.drawCircle(this.centerX, this.centerY, this.radius, p);
+		canvas.drawCircle(this.ballX, this.ballY, this.ballRadius, p);
 	}
 }

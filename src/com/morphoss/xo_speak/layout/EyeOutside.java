@@ -15,6 +15,14 @@ public class EyeOutside {
 		public void draw(Canvas canvas) {
 			
 		}
+		
+		public EyeInside getInsideEye() {
+			EyeInside inside = new EyeInside();
+			inside.centerX = centerX;
+			inside.centerY = centerY;
+			inside.radius = radius;
+			return inside;
+		}
 
 	}
 	

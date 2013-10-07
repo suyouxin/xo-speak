@@ -21,3 +21,4 @@ public 	class EyeCoordinatesForFive extends EyeInitCoordinates {
 		eyes.get(4).radius /= 1.2;
 	}
 }
+

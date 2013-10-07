@@ -24,6 +24,7 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.listeners.OnLanguageSelectedListener;
 import com.morphoss.xo_speak.listeners.OnMouthStyleSelectedListener;
 import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
@@ -221,6 +222,7 @@ public class MainActivity extends Activity implements
 				repeatText();
 			}
 
+			refreshFace();
 		} else {
 			Log.e("TTS", "Initilization Failed!");
 		}
@@ -229,7 +231,8 @@ public class MainActivity extends Activity implements
 	public void refreshFace() {
 		int numberEyes = OnNumberEyesSelectedListener.numberEyes;
 		int shapeEyes = OnStyleEyesSelectedListener.shapeEyes;
-		eyesOut.createEyes(numberEyes, shapeEyes);
+		ArrayList<EyeOutside> listEyeOut = eyesOut.createEyes(numberEyes, shapeEyes);
+		eyesIn.setEyes(listEyeOut);
 		eyesOut.invalidate(); 
 		eyesIn.invalidate();
 	}
