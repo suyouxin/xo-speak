@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -18,6 +20,8 @@ import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.layout.EyeShapeCircle;
 import com.morphoss.xo_speak.layout.EyeShapeRoundedRect;
 import com.morphoss.xo_speak.layout.EyeShapeSquare;
+import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
+import com.morphoss.xo_speak.listeners.OnStyleEyesSelectedListener;
 
 public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 
@@ -83,8 +87,25 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 	@Override
 	protected void onDraw(Canvas canvas) {
 		
+		Paint pLine = new Paint();
+		pLine.setColor(Color.BLACK);
+		pLine.setStyle(Paint.Style.STROKE);
+		pLine.setStrokeWidth(6.0f);
+		
 		for (EyeOutside eyeball : mEyeOutside) {
 			eyeball.draw(canvas);
+		}
+		
+		if(OnStyleEyesSelectedListener.shapeEyes == 3){
+			for(int i=0; i<mEyeOutside.size()-1; i++){
+				EyeOutside eye1 = mEyeOutside.get(i);
+				EyeOutside eye2 = mEyeOutside.get(i+1);
+				if(OnNumberEyesSelectedListener.numberEyes == 2){
+				canvas.drawLine(eye1.centerX-eye1.radius, eye1.centerY, eye2.centerX+eye2.radius, eye2.centerY, pLine);
+				}else{
+					canvas.drawLine(eye1.centerX+eye1.radius, eye1.centerY, eye2.centerX-eye2.radius, eye2.centerY, pLine);	
+				}
+			}
 		}
 	}
 
