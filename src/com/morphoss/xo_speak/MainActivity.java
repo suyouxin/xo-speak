@@ -48,7 +48,7 @@ public class MainActivity extends Activity implements
 	private SeekBar pitchSlider, speedSlider;
 	private TextView mSetPitch, mSetSpeed,textSavedMem1;
 	private Handler h = new Handler();
-	private ArrayList<String> item;
+	private ArrayList<String> item = new ArrayList<String>();
 
 	@SuppressLint("ServiceCast")
 	@Override
@@ -57,7 +57,6 @@ public class MainActivity extends Activity implements
 		setContentView(R.layout.activity_main);
 		localeList.clear();
 		localeNames.clear();
-
 		tts = new TextToSpeech(this, this);
 		txtBox = (AutoCompleteTextView) findViewById(R.id.autocompleteText);
 		
@@ -68,7 +67,6 @@ public class MainActivity extends Activity implements
 		eyesIn = (eyeInLayout) findViewById(R.id.eyeIn);
 		eyesOut = (eyeOutLayout) findViewById(R.id.eyeOut);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
-		textSavedMem1 = (TextView)findViewById(R.id.savedmem1);
 		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
 		speedSlider.setOnSeekBarChangeListener(new speedListener());
 
@@ -117,12 +115,11 @@ public class MainActivity extends Activity implements
 		   private void LoadPreferences(){
 		    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
 		    String strSavedMem1 = sharedPreferences.getString("MEM1", "");
-		    if(item!=null){
+		    if(item!=null && !(item.contains(strSavedMem1))){
 		    item.add(strSavedMem1);
 		    txtBox.addTextChangedListener(this);
 		    txtBox.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,item));
 		    }
-		    textSavedMem1.setText(strSavedMem1);
 		   }
 	private class pitchListener implements SeekBar.OnSeekBarChangeListener {
 

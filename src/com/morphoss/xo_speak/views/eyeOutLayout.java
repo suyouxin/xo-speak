@@ -103,7 +103,7 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 				if(OnNumberEyesSelectedListener.numberEyes == 2){
 				canvas.drawLine(eye1.centerX-eye1.radius, eye1.centerY, eye2.centerX+eye2.radius, eye2.centerY, pLine);
 				}else{
-					canvas.drawLine(eye1.centerX+eye1.radius, eye1.centerY, eye2.centerX-eye2.radius, eye2.centerY, pLine);	
+					canvas.drawLine(eye1.centerX+eye1.radius, eye1.centerY, eye2.centerX-eye2.radius, eye2.centerY, pLine);
 				}
 			}
 		}

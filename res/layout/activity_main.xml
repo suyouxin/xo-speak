@@ -88,19 +88,6 @@
         android:layout_weight="14"
         android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="You have written:"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:id="@+id/savedmem1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:textColor="@android:color/black" />
-
         <com.morphoss.xo_speak.views.eyeOutLayout
             android:id="@+id/eyeOut"
             android:layout_width="wrap_content"
