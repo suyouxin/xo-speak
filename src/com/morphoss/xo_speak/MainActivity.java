@@ -69,7 +69,6 @@ public class MainActivity extends Activity implements
 		eyesOut = (eyeOutLayout) findViewById(R.id.eyeOut);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
 		textSavedMem1 = (TextView)findViewById(R.id.savedmem1);
-
 		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
 		speedSlider.setOnSeekBarChangeListener(new speedListener());
 

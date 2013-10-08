@@ -16,6 +16,7 @@ import com.morphoss.xo_speak.coordinates.EyeCoordinatesForTwo;
 import com.morphoss.xo_speak.coordinates.EyeInitCoordinates;
 import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.layout.EyeShapeCircle;
+import com.morphoss.xo_speak.layout.EyeShapeRoundedRect;
 import com.morphoss.xo_speak.layout.EyeShapeSquare;
 
 public class eyeOutLayout extends View implements SurfaceHolder.Callback{
@@ -63,6 +64,9 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 			else if (style == 2) {
 				//shape = square
 				eye = new EyeShapeSquare();
+			}else if (style == 3) {
+				//shape = glasses
+				eye = new EyeShapeRoundedRect();
 			}
 			eyes.add(eye);
 		}
