@@ -234,6 +234,7 @@ public class MainActivity extends Activity implements
 		eyesIn.setEyes(listEyeOut);
 		eyesOut.invalidate(); 
 		eyesIn.invalidate();
+		mouth.invalidate();
 	}
 	
 	private void repeatText() {
@@ -291,7 +292,7 @@ public class MainActivity extends Activity implements
 	public void addListenerOnSpinnerMouthStyle() {
 		spinnerMouthStyle = (Spinner) findViewById(R.id.spinnerMouthStyle);
 		spinnerMouthStyle
-				.setOnItemSelectedListener(new OnMouthStyleSelectedListener());
+				.setOnItemSelectedListener(new OnMouthStyleSelectedListener(this));
 	}
 	public void addListenerOnSpinnerStyleEyes() {
 		spinnerStyleEyes = (Spinner) findViewById(R.id.spinnerStyleEyes);
