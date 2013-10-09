@@ -19,7 +19,7 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 
 	private static Paint pIn = new Paint();
 	private static Paint pOut = new Paint();
-	public static int valueY;
+	public static double valueY = 30;
 	private int w;
 	private int h;
 	private static final String TAG = "MouthLayout";
@@ -57,7 +57,6 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 		pIn.setStyle(Style.FILL);
 		pIn.setColor(Color.LTGRAY);
 
-		valueY = h / 6;
 		Log.d(TAG, "value of mouth style : "
 				+ OnMouthStyleSelectedListener.style);
 		if (OnMouthStyleSelectedListener.style == 1) {
@@ -104,31 +103,34 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 	}
 
 	private Path drawCurveUp(Canvas canvas, Paint paint, PointF mPointa,
-			PointF mPointb, int valueY, int centerCurve) {
+			PointF mPointb, double valueY, int centerCurve) {
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
 		Path myPath = new Path();
 		myPath.moveTo(mPointa.x, mPointa.y);
-		myPath.quadTo(mPointa.x + centerCurve, mPointa.y + valueY, mPointb.x,
+		myPath.quadTo(mPointa.x + centerCurve, (float) (mPointa.y + valueY), mPointb.x,
 				mPointb.y);
 		return myPath;
 	}
 
 	private Path drawCurveDown(Canvas canvas, Paint paint, PointF mPointa,
-			PointF mPointb, int valueY, int centerCurve) {
+			PointF mPointb, double valueY, int centerCurve) {
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
 		Path myPath = new Path();
 		myPath.moveTo(mPointa.x, mPointa.y);
-		myPath.quadTo(mPointa.x + centerCurve, mPointa.y - valueY, mPointb.x,
+		myPath.quadTo(mPointa.x + centerCurve, (float) (mPointa.y - valueY), mPointb.x,
 				mPointb.y);
 		return myPath;
 	}
 
-	public void mouthSpeaking(double i) {
+	public void mouthSpeaking(int i) {
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
-		valueY = (int) (h / (4 + i));
+		if (i % 2 == 0)
+			valueY = 80;
+		else
+			valueY = 30;
 	}
 
 	@Override

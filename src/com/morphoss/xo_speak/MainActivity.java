@@ -247,14 +247,13 @@ public class MainActivity extends Activity implements
 		@Override
 		public void run() {
 
-			double i = 0;
-			double j = 0;
+			int i = 0;
 
 			while (true) {
 				if (!tts.isSpeaking())
 					break;
-				eyesIn.moveEye(i * 0.01);
-				mouth.mouthSpeaking(j * 0.001);
+				eyesIn.moveEye(i);
+				mouth.mouthSpeaking(i);
 				h.post(new Runnable() {
 
 					@Override
@@ -263,12 +262,14 @@ public class MainActivity extends Activity implements
 						mouth.invalidate();
 					}
 				});
-				i = i + 0.5;
-				j = j + 0.005;
+				i++;
 				if (i > 3000)
 					i = 0;
-				if (j > 3000)
-					j = 0;
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			Log.e("TTS", "speak finished");
 		}
