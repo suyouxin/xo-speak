@@ -19,7 +19,7 @@ public class EyeShapeSquare extends EyeOutside {
 		pIn.setColor(Color.WHITE);
 		pOut.setStyle(Paint.Style.FILL);
 		pIn.setStyle(Paint.Style.FILL); 
-		canvas.drawRect(this.centerX-this.radius-4, this.centerY-this.radius, this.centerX+this.radius+4, this.centerY+this.radius, pOut);
-		canvas.drawRect(this.centerX-this.radius, this.centerY-this.radius+4, this.centerX+this.radius, this.centerY+this.radius-4, pIn);
+		canvas.drawRect(this.centerX-this.radius-6, this.centerY-this.radius, this.centerX+this.radius+6, this.centerY+this.radius, pOut);
+		canvas.drawRect(this.centerX-this.radius, this.centerY-this.radius+6, this.centerX+this.radius, this.centerY+this.radius-6, pIn);
 	}
 }

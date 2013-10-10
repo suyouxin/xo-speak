@@ -8,6 +8,7 @@
     <string name="color_eyes__prompt">Color of the eyes</string>
     <string name="style_eyes__prompt">Style of the eyes</string>
     <string name="number_eyes__prompt">Number of eyes</string>
+    <string name="nose_style__prompt">Nose\'s Style</string>
     <string name="mouth_style__prompt">Mouth\'s Style</string>
     <string name="default_language">Default language</string>
     <string name="start">Start</string>
@@ -21,7 +22,7 @@
         <item>Four</item>
         <item>Five</item>
     </string-array>
-    <string-array name="style_eyes">
+    <string-array name="eyes_style">
         <item>Round</item>
         <item>Square</item>
         <item>Glasses</item>
@@ -33,6 +34,13 @@
         <item>Brown</item>
         <item>Gray</item>
         <item>Red</item>
+    </string-array>
+    <string-array name="nose_style">
+        <item>Choice 1</item>
+        <item>Choice 2</item>
+        <item>Choice 3</item>
+        <item>Choice 4</item>
+        <item>Choice 5</item>
     </string-array>
     <string-array name="mouth_style">
         <item>Simple style</item>

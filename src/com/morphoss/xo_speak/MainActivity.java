@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.listeners.OnColorEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnLanguageSelectedListener;
 import com.morphoss.xo_speak.listeners.OnMouthStyleSelectedListener;
+import com.morphoss.xo_speak.listeners.OnNoseStyleSelectedListener;
 import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnStyleEyesSelectedListener;
 import com.morphoss.xo_speak.views.MouthLayout;
@@ -39,15 +41,17 @@ public class MainActivity extends Activity implements
 
 	private static TextToSpeech tts;
 	private AutoCompleteTextView txtBox;
-	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle, spinnerStyleEyes, spinnerColorEyes;
+	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle,
+			spinnerStyleEyes, spinnerNoseStyle, spinnerColorEyes;
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
+	public ImageView nose;
 	private eyeOutLayout eyesOut;
 	private eyeInLayout eyesIn;
 	private MouthLayout mouth;
 	private SeekBar pitchSlider, speedSlider;
-	private TextView mSetPitch, mSetSpeed,textSavedMem1;
+	private TextView mSetPitch, mSetSpeed, textSavedMem1;
 	private Handler h = new Handler();
 	private ArrayList<String> item = new ArrayList<String>();
 
@@ -60,13 +64,14 @@ public class MainActivity extends Activity implements
 		localeNames.clear();
 		tts = new TextToSpeech(this, this);
 		txtBox = (AutoCompleteTextView) findViewById(R.id.autocompleteText);
-		
+
 		pitchSlider = (SeekBar) findViewById(R.id.pitchSlider);
 		mSetPitch = (TextView) findViewById(R.id.set_pitch);
 		mSetSpeed = (TextView) findViewById(R.id.set_speed);
 		speedSlider = (SeekBar) findViewById(R.id.speedSlider);
 		eyesIn = (eyeInLayout) findViewById(R.id.eyeIn);
 		eyesOut = (eyeOutLayout) findViewById(R.id.eyeOut);
+		nose = (ImageView) findViewById(R.id.nose);
 		mouth = (MouthLayout) findViewById(R.id.mouth);
 		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
 		speedSlider.setOnSeekBarChangeListener(new speedListener());
@@ -74,8 +79,10 @@ public class MainActivity extends Activity implements
 		addListenerOnSpinnerLanguage();
 		addListenerOnSpinnerEyes();
 		addListenerOnSpinnerMouthStyle();
+		addListenerOnSpinnerNoseStyle();
 		addListenerOnSpinnerStyleEyes();
 		addListenerOnSpinnerColorEyes();
+
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -87,15 +94,7 @@ public class MainActivity extends Activity implements
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
-						SavePreferences("MEM1", txtBox.getText().toString());
-						LoadPreferences();
-						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-						imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
-						h.postDelayed(new Runnable() {
-							public void run() {
-								repeatText();
-							}
-						}, 1000);
+						speakText();
 
 						return true;
 					default:
@@ -107,22 +106,36 @@ public class MainActivity extends Activity implements
 		});
 		LoadPreferences();
 	}
-	   private void SavePreferences(String key, String value){
-		    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-		    SharedPreferences.Editor editor = sharedPreferences.edit();
-		    editor.putString(key, value);
-		    editor.commit();
-		   }
-		  
-		   private void LoadPreferences(){
-		    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-		    String strSavedMem1 = sharedPreferences.getString("MEM1", "");
-		    if(item!=null && !(item.contains(strSavedMem1))){
-		    item.add(strSavedMem1);
-		    txtBox.addTextChangedListener(this);
-		    txtBox.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,item));
-		    }
-		   }
+
+	private void speakText(){
+		SavePreferences("MEM1", txtBox.getText().toString());
+		LoadPreferences();
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(txtBox.getWindowToken(), 0);
+		h.postDelayed(new Runnable() {
+			public void run() {
+				repeatText();
+			}
+		}, 1000);
+	}
+	private void SavePreferences(String key, String value) {
+		SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString(key, value);
+		editor.commit();
+	}
+
+	private void LoadPreferences() {
+		SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+		String strSavedMem1 = sharedPreferences.getString("MEM1", "");
+		if (item != null && !(item.contains(strSavedMem1))) {
+			item.add(strSavedMem1);
+			txtBox.addTextChangedListener(this);
+			txtBox.setAdapter(new ArrayAdapter<String>(this,
+					android.R.layout.simple_dropdown_item_1line, item));
+		}
+	}
+
 	private class pitchListener implements SeekBar.OnSeekBarChangeListener {
 
 		public void onProgressChanged(SeekBar seekBar, int progress,
@@ -166,7 +179,7 @@ public class MainActivity extends Activity implements
 			double speed = (speedSlider.getProgress() + 1);
 			speed = speed / 10;
 			tts.setSpeechRate((float) speed);
-			
+
 		}
 
 	}
@@ -184,7 +197,6 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onInit(int status) {
 
-		
 		if (status == TextToSpeech.SUCCESS) {
 			// set language of the tablet as default language
 			int result = tts.setLanguage(Locale.getDefault());
@@ -231,13 +243,15 @@ public class MainActivity extends Activity implements
 	public void refreshFace() {
 		int numberEyes = OnNumberEyesSelectedListener.numberEyes;
 		int shapeEyes = OnStyleEyesSelectedListener.shapeEyes;
-		ArrayList<EyeOutside> listEyeOut = eyesOut.createEyes(numberEyes, shapeEyes);
+		ArrayList<EyeOutside> listEyeOut = eyesOut.createEyes(numberEyes,
+				shapeEyes);
 		eyesIn.setEyes(listEyeOut);
-		eyesOut.invalidate(); 
+		eyesOut.invalidate();
 		eyesIn.invalidate();
+		nose.invalidate();
 		mouth.invalidate();
 	}
-	
+
 	private void repeatText() {
 
 		String text = txtBox.getText().toString();
@@ -279,48 +293,63 @@ public class MainActivity extends Activity implements
 		}
 
 	}
-	
+
 	public void addListenerOnSpinnerLanguage() {
 		spinnerLanguage = (Spinner) findViewById(R.id.spinnerLanguage);
 		spinnerLanguage
 				.setOnItemSelectedListener(new OnLanguageSelectedListener());
 	}
+
 	public void addListenerOnSpinnerEyes() {
 		spinnerNumberEyes = (Spinner) findViewById(R.id.spinnerNumberEyes);
 		spinnerNumberEyes
-				.setOnItemSelectedListener(new OnNumberEyesSelectedListener(this));
+				.setOnItemSelectedListener(new OnNumberEyesSelectedListener(
+						this));
 	}
 
 	public void addListenerOnSpinnerMouthStyle() {
 		spinnerMouthStyle = (Spinner) findViewById(R.id.spinnerMouthStyle);
 		spinnerMouthStyle
-				.setOnItemSelectedListener(new OnMouthStyleSelectedListener(this));
+				.setOnItemSelectedListener(new OnMouthStyleSelectedListener(
+						this));
 	}
+	public void addListenerOnSpinnerNoseStyle() {
+		spinnerNoseStyle = (Spinner) findViewById(R.id.spinnerNoseStyle);
+		spinnerNoseStyle
+				.setOnItemSelectedListener(new OnNoseStyleSelectedListener(
+						this));
+	}
+
 	public void addListenerOnSpinnerStyleEyes() {
 		spinnerStyleEyes = (Spinner) findViewById(R.id.spinnerStyleEyes);
 		spinnerStyleEyes
 				.setOnItemSelectedListener(new OnStyleEyesSelectedListener(this));
 	}
+
 	public void addListenerOnSpinnerColorEyes() {
 		spinnerColorEyes = (Spinner) findViewById(R.id.spinnerColorEyes);
 		spinnerColorEyes
 				.setOnItemSelectedListener(new OnColorEyesSelectedListener(this));
 	}
+
 	public static TextToSpeech getTts() {
 		return tts;
 	}
+
 	@Override
 	public void afterTextChanged(Editable s) {
-		
+
 	}
+
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-		
+
 	}
+
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		
+
 	}
 
 }

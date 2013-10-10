@@ -12,7 +12,7 @@ public class EyeInitCoordinates {
 	public void calc(ArrayList<EyeOutside> eyes, int canvasWidth, int canvasHeight) {
 		w = canvasWidth / 2;
 		h = canvasHeight / 4;
-		r = w / 6;
+		r = (int) (w / 6.5);
 		
 		for (EyeOutside eye : eyes) {
 			eye.centerX = w;

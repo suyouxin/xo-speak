@@ -19,7 +19,7 @@ public class EyeShapeCircle extends EyeOutside {
 		pOut.setStyle(Paint.Style.FILL);
 		pIn.setStyle(Paint.Style.FILL);
 		
-		canvas.drawCircle(this.centerX, this.centerY, this.radius+4, pOut);
+		canvas.drawCircle(this.centerX, this.centerY, this.radius+6, pOut);
 		canvas.drawCircle(this.centerX, this.centerY, this.radius, pIn);
 	}
 	

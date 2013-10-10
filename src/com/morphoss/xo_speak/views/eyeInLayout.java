@@ -41,7 +41,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 			EyeInside insideEye = eyeball.getInsideEye();
 			insideEye.ballX = insideEye.centerX;
 			insideEye.ballY = insideEye.centerY+15;
-			insideEye.ballRadius = w/19;
+			insideEye.ballRadius = w/16;
 			mEyeInside.add(insideEye);
 		}
 	}
@@ -83,7 +83,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 			int projY = (int) (Y + Math.sqrt(Math.pow(r, 2) - Math.pow(projX - eye.centerX, 2)));
 			eye.ballX = projX;
 			eye.ballY = projY;
-			eye.ballRadius = w /19;
+			eye.ballRadius = w /16;
 			}
 			if(Y > touchY){
 			double centerToPoint = Math.sqrt(Math.pow(touchX-eye.centerX, 2)+Math.pow(Y-touchY, 2));	
@@ -91,7 +91,7 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 			int projY = (int) (Y - Math.sqrt(Math.pow(r, 2) - Math.pow(projX - eye.centerX, 2)));
 			eye.ballX = projX;
 			eye.ballY = projY;
-			eye.ballRadius = w /19;
+			eye.ballRadius = w /16;
 			}
 		}
 		

@@ -19,10 +19,11 @@ public class EyeInside extends EyeOutside {
 	@Override
 	public void draw(Canvas canvas) {
 		Paint p = new Paint();
+		Paint pBlack = new Paint();
 		Paint pIn = new Paint();
 
 		if(OnColorEyesSelectedListener.colorEyes == 1){
-		p.setColor(Color.BLACK);
+		p.setColor(Color.rgb(15, 14, 20));
 		}
 		if(OnColorEyesSelectedListener.colorEyes == 2){
 			//blue
@@ -44,10 +45,13 @@ public class EyeInside extends EyeOutside {
 			//red
 			p.setColor(Color.rgb(148, 0, 14));
 			}
+		pBlack.setColor(Color.BLACK);
 		pIn.setColor(Color.WHITE);
+		pBlack.setStyle(Paint.Style.FILL);
 		p.setStyle(Paint.Style.FILL);
 		pIn.setStyle(Paint.Style.FILL);
 		canvas.drawCircle(this.ballX, this.ballY, this.ballRadius, p);
-		canvas.drawCircle(this.ballX, this.ballY+2, this.ballRadius/4, pIn);
+		canvas.drawCircle(this.ballX, this.ballY, (float) (this.ballRadius/1.8), pBlack);
+		canvas.drawCircle(this.ballX+this.ballRadius/2-3, this.ballY+2, this.ballRadius/5, pIn);
 	}
 }

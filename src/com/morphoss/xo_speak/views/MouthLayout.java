@@ -42,8 +42,8 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
-		PointF mPoint1 = new PointF(w / 3, 2 * h / 3);
-		PointF mPoint2 = new PointF(2 * w / 3, 2 * h / 3);
+		PointF mPoint1 = new PointF(w / 3+w/32, (2 * h / 3)+h/32);
+		PointF mPoint2 = new PointF((2 * w / 3)-w/32, (2 * h / 3)+h/32);
 		Path myPathOutUp = new Path();
 		Path myPathOutDown = new Path();
 		Path myPathInUp = new Path();
@@ -55,33 +55,33 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 
 		pIn.setAntiAlias(true);
 		pIn.setStyle(Style.FILL);
-		pIn.setColor(Color.LTGRAY);
+		pIn.setColor(Color.rgb(142, 91, 94));
 
 		Log.d(TAG, "value of mouth style : "
 				+ OnMouthStyleSelectedListener.style);
 		if (OnMouthStyleSelectedListener.style == 1) {
 
 			myPathOutUp = drawCurveUp(canvas, pOut, mPoint1, mPoint2, valueY,
-					w / 6);
+					w / 7);
 			canvas.drawPath(myPathOutUp, pOut);
 			myPathOutDown = drawCurveDown(canvas, pOut, mPoint1, mPoint2,
-					valueY, w / 6);
+					valueY, w / 7);
 			canvas.drawPath(myPathOutDown, pOut);
 
 			myPathInUp = drawCurveUp(canvas, pIn, mPoint1, mPoint2, valueY,
-					w / 6);
+					w / 7);
 			canvas.drawPath(myPathInUp, pIn);
 			myPathInDown = drawCurveDown(canvas, pIn, mPoint1, mPoint2, valueY,
-					w / 6);
+					w / 7);
 			canvas.drawPath(myPathInDown, pIn);
 		}
 		if (OnMouthStyleSelectedListener.style == 2) {
-			PointF mPointa = new PointF(w/3, 2 * h / 3);
-			PointF mPointb = new PointF(6*w/15, 2 * h / 3);
-			PointF mPointc = new PointF(7*w/15, 2 * h / 3);
-			PointF mPointd = new PointF(8*w/15, 2 * h / 3);
-			PointF mPointe = new PointF(3*w/5, 2 * h / 3);
-			PointF mPointf = new PointF(2*w/3, 2 * h / 3);
+			PointF mPointa = new PointF(w/3, (2 * h / 3)+h/32);
+			PointF mPointb = new PointF(6*w/15, (2 * h / 3)+h/32);
+			PointF mPointc = new PointF(7*w/15, (2 * h / 3)+h/32);
+			PointF mPointd = new PointF(8*w/15, (2 * h / 3)+h/32);
+			PointF mPointe = new PointF(3*w/5, (2 * h / 3)+h/32);
+			PointF mPointf = new PointF(2*w/3, (2 * h / 3)+h/32);
 			myPathOutUp = drawCurveUp(canvas, pOut, mPointa, mPointb, valueY,
 					w / 28);
 			canvas.drawPath(myPathOutUp, pOut);
@@ -128,9 +128,9 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
 		if (i % 2 == 0)
-			valueY = 80;
+			valueY = 60;
 		else
-			valueY = 30;
+			valueY = 20;
 	}
 
 	@Override

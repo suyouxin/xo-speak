@@ -92,7 +92,7 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 		Paint pLine = new Paint();
 		pLine.setColor(Color.BLACK);
 		pLine.setStyle(Paint.Style.STROKE);
-		pLine.setStrokeWidth(8.0f);
+		pLine.setStrokeWidth(12.0f);
 		
 		
 		for (EyeOutside eyeball : mEyeOutside) {
