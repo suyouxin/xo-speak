@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.morphoss.xo_speak.layout.EyeOutside;
+import com.morphoss.xo_speak.listeners.OnColorEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnLanguageSelectedListener;
 import com.morphoss.xo_speak.listeners.OnMouthStyleSelectedListener;
 import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
@@ -38,7 +39,7 @@ public class MainActivity extends Activity implements
 
 	private static TextToSpeech tts;
 	private AutoCompleteTextView txtBox;
-	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle, spinnerStyleEyes;
+	private Spinner spinnerLanguage, spinnerNumberEyes, spinnerMouthStyle, spinnerStyleEyes, spinnerColorEyes;
 	private ArrayList<String> localeNames = new ArrayList<String>();
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
@@ -74,6 +75,7 @@ public class MainActivity extends Activity implements
 		addListenerOnSpinnerEyes();
 		addListenerOnSpinnerMouthStyle();
 		addListenerOnSpinnerStyleEyes();
+		addListenerOnSpinnerColorEyes();
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -164,6 +166,7 @@ public class MainActivity extends Activity implements
 			double speed = (speedSlider.getProgress() + 1);
 			speed = speed / 10;
 			tts.setSpeechRate((float) speed);
+			
 		}
 
 	}
@@ -181,6 +184,7 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onInit(int status) {
 
+		
 		if (status == TextToSpeech.SUCCESS) {
 			// set language of the tablet as default language
 			int result = tts.setLanguage(Locale.getDefault());
@@ -296,6 +300,11 @@ public class MainActivity extends Activity implements
 		spinnerStyleEyes = (Spinner) findViewById(R.id.spinnerStyleEyes);
 		spinnerStyleEyes
 				.setOnItemSelectedListener(new OnStyleEyesSelectedListener(this));
+	}
+	public void addListenerOnSpinnerColorEyes() {
+		spinnerColorEyes = (Spinner) findViewById(R.id.spinnerColorEyes);
+		spinnerColorEyes
+				.setOnItemSelectedListener(new OnColorEyesSelectedListener(this));
 	}
 	public static TextToSpeech getTts() {
 		return tts;

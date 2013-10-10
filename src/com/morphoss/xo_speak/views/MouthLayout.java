@@ -50,7 +50,7 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 		Path myPathInDown = new Path();
 		pOut.setAntiAlias(true);
 		pOut.setStyle(Style.STROKE);
-		pOut.setStrokeWidth(5.0f);
+		pOut.setStrokeWidth(8.0f);
 		pOut.setColor(Color.BLACK);
 
 		pIn.setAntiAlias(true);

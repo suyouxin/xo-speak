@@ -28,6 +28,8 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 	
 	ArrayList<EyeOutside> mEyeOutside;
 	ArrayList<EyeInitCoordinates> mCoordinates;
+	public int height = this.getMeasuredHeight();
+	public int width = this.getMeasuredWidth();
 	
 	private static final String TAG = "eyeOutLayout";
 	//by default the shape of the eyes is "Round"
@@ -90,7 +92,8 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 		Paint pLine = new Paint();
 		pLine.setColor(Color.BLACK);
 		pLine.setStyle(Paint.Style.STROKE);
-		pLine.setStrokeWidth(6.0f);
+		pLine.setStrokeWidth(8.0f);
+		
 		
 		for (EyeOutside eyeball : mEyeOutside) {
 			eyeball.draw(canvas);

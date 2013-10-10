@@ -20,8 +20,8 @@ public class EyeShapeRoundedRect extends EyeOutside {
 		pIn.setColor(Color.WHITE);
 		pOut.setStyle(Paint.Style.FILL);
 		pIn.setStyle(Paint.Style.FILL); 
-	    RectF rect1 = new RectF(this.centerX-this.radius-5, this.centerY-this.radius, this.centerX+this.radius+5, this.centerY+this.radius);
-	    RectF rect2 = new RectF(this.centerX-this.radius, this.centerY-this.radius+5, this.centerX+this.radius, this.centerY+this.radius-5);
+	    RectF rect1 = new RectF(this.centerX-this.radius-8, this.centerY-this.radius, this.centerX+this.radius+8, this.centerY+this.radius);
+	    RectF rect2 = new RectF(this.centerX-this.radius, this.centerY-this.radius+8, this.centerX+this.radius, this.centerY+this.radius-8);
 	    canvas.drawRoundRect(rect1, 15, 15, pOut);
 	    canvas.drawRoundRect(rect2, 15, 15, pIn);
 	}
