@@ -10,7 +10,7 @@
     <string name="number_eyes__prompt">Number of eyes</string>
     <string name="nose_style__prompt">Nose\'s Style</string>
     <string name="mouth_style__prompt">Mouth\'s Style</string>
-    <string name="default_language">Default language</string>
+    <string name="default_language">Default</string>
     <string name="start">Start</string>
     <string name="setpitch">Pitch :</string>
     <string name="setspeed">Speed :</string>

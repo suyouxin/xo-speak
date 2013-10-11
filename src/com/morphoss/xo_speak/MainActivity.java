@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -47,6 +48,7 @@ public class MainActivity extends Activity implements
 	public static ArrayList<Locale> localeList = new ArrayList<Locale>();
 	private static final String TAG = "MainActivity";
 	public ImageView nose;
+	private ImageView speaker;
 	private eyeOutLayout eyesOut;
 	private eyeInLayout eyesIn;
 	private MouthLayout mouth;
@@ -83,6 +85,14 @@ public class MainActivity extends Activity implements
 		addListenerOnSpinnerStyleEyes();
 		addListenerOnSpinnerColorEyes();
 
+		speaker = (ImageView) findViewById(R.id.speakAgain);
+		speaker.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				speakText();
+			}
+		});
 		// permit to remove the focus of the keyboard
 		this.getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -107,7 +117,7 @@ public class MainActivity extends Activity implements
 		LoadPreferences();
 	}
 
-	private void speakText(){
+	private void speakText() {
 		SavePreferences("MEM1", txtBox.getText().toString());
 		LoadPreferences();
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -118,6 +128,7 @@ public class MainActivity extends Activity implements
 			}
 		}, 1000);
 	}
+
 	private void SavePreferences(String key, String value) {
 		SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -313,11 +324,11 @@ public class MainActivity extends Activity implements
 				.setOnItemSelectedListener(new OnMouthStyleSelectedListener(
 						this));
 	}
+
 	public void addListenerOnSpinnerNoseStyle() {
 		spinnerNoseStyle = (Spinner) findViewById(R.id.spinnerNoseStyle);
 		spinnerNoseStyle
-				.setOnItemSelectedListener(new OnNoseStyleSelectedListener(
-						this));
+				.setOnItemSelectedListener(new OnNoseStyleSelectedListener(this));
 	}
 
 	public void addListenerOnSpinnerStyleEyes() {

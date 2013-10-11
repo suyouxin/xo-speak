@@ -2,10 +2,13 @@ package com.morphoss.xo_speak.views;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -23,6 +26,7 @@ import com.morphoss.xo_speak.layout.EyeShapeSquare;
 import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnStyleEyesSelectedListener;
 
+@SuppressLint("DrawAllocation")
 public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 
 	
@@ -90,6 +94,11 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 	protected void onDraw(Canvas canvas) {
 		
 		Paint pLine = new Paint();
+		Paint pEyebrow = new Paint();
+		Path mPath = new Path();
+		pEyebrow.setColor(Color.BLACK);
+		pEyebrow.setStyle(Paint.Style.STROKE);
+		pEyebrow.setStrokeWidth(6.0f);
 		pLine.setColor(Color.BLACK);
 		pLine.setStyle(Paint.Style.STROKE);
 		pLine.setStrokeWidth(12.0f);
@@ -97,6 +106,10 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 		
 		for (EyeOutside eyeball : mEyeOutside) {
 			eyeball.draw(canvas);
+			PointF mPoint1 = new PointF(eyeball.centerX-eyeball.radius, eyeball.centerY-eyeball.radius-25);
+			PointF mPoint2 = new PointF(eyeball.centerX+eyeball.radius, eyeball.centerY-eyeball.radius-25);
+			mPath = drawCurveUp(canvas, pEyebrow, mPoint1, mPoint2, 27, width/12);
+			canvas.drawPath(mPath, pEyebrow);
 		}
 		
 		if(OnStyleEyesSelectedListener.shapeEyes == 3){
@@ -111,7 +124,16 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 			}
 		}
 	}
-
+	private Path drawCurveUp(Canvas canvas, Paint paint, PointF mPointa,
+			PointF mPointb, double valueY, int centerCurve) {
+		width = this.getMeasuredWidth();
+		height = this.getMeasuredHeight();
+		Path myPath = new Path();
+		myPath.moveTo(mPointa.x, mPointa.y);
+		myPath.quadTo(mPointa.x + centerCurve, (float) (mPointa.y - valueY), mPointb.x,
+				mPointb.y);
+		return myPath;
+	}
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
  

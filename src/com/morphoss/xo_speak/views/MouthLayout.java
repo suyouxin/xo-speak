@@ -102,7 +102,7 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 		}
 	}
 
-	private Path drawCurveUp(Canvas canvas, Paint paint, PointF mPointa,
+	private Path drawCurveDown(Canvas canvas, Paint paint, PointF mPointa,
 			PointF mPointb, double valueY, int centerCurve) {
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();
@@ -113,7 +113,7 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 		return myPath;
 	}
 
-	private Path drawCurveDown(Canvas canvas, Paint paint, PointF mPointa,
+	private Path drawCurveUp(Canvas canvas, Paint paint, PointF mPointa,
 			PointF mPointb, double valueY, int centerCurve) {
 		w = this.getMeasuredWidth();
 		h = this.getMeasuredHeight();

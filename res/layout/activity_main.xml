@@ -6,10 +6,10 @@
 
     <FrameLayout
         android:id="@+id/actionBar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:layout_weight="0.1"
+        android:layout_weight="0.13"
         android:background="@android:color/background_dark" >
 
         <Spinner
@@ -111,9 +111,9 @@
 
     <FrameLayout
         android:id="@+id/face"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.9"
+        android:layout_weight="0.87"
         android:orientation="horizontal" >
 
         <com.morphoss.xo_speak.views.eyeOutLayout
