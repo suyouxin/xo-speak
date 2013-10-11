@@ -48,11 +48,16 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 		Path myPathOutDown = new Path();
 		Path myPathInUp = new Path();
 		Path myPathInDown = new Path();
+		Path myPathSmileUp = new Path();
+		Path myPathSmileDown = new Path();
 		pOut.setAntiAlias(true);
+		Paint pSmile = new Paint();
 		pOut.setStyle(Style.STROKE);
 		pOut.setStrokeWidth(8.0f);
 		pOut.setColor(Color.BLACK);
-
+		pSmile.setStyle(Style.FILL);
+		pSmile.setStrokeWidth(8.0f);
+		pSmile.setColor(Color.WHITE);
 		pIn.setAntiAlias(true);
 		pIn.setStyle(Style.FILL);
 		pIn.setColor(Color.rgb(142, 91, 94));
@@ -99,6 +104,28 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 			canvas.drawPath(myPathOutUp, pOut);
 
 
+		}
+		if (OnMouthStyleSelectedListener.style == 3) {
+
+			myPathOutUp = drawCurveUp(canvas, pOut, mPoint1, mPoint2, valueY,
+					w / 7);
+			canvas.drawPath(myPathOutUp, pOut);
+			myPathOutDown = drawCurveDown(canvas, pOut, mPoint1, mPoint2,
+					valueY, w / 7);
+			canvas.drawPath(myPathOutDown, pOut);
+			myPathSmileUp = drawCurveUp(canvas, pSmile, mPoint1, mPoint2, valueY,
+					w / 7);
+			canvas.drawPath(myPathSmileUp, pSmile);
+			myPathSmileDown = drawCurveDown(canvas, pSmile, mPoint1, mPoint2,
+					valueY, w / 7);
+			canvas.drawPath(myPathSmileDown, pSmile);
+
+			myPathInUp = drawCurveUp(canvas, pIn, mPoint1, mPoint2, valueY/1.3,
+					w / 7);
+			canvas.drawPath(myPathInUp, pIn);
+			myPathInDown = drawCurveDown(canvas, pIn, mPoint1, mPoint2, valueY/1.3,
+					w / 7);
+			canvas.drawPath(myPathInDown, pIn);
 		}
 	}
 
