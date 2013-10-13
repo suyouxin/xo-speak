@@ -120,10 +120,10 @@ public class MouthLayout extends View implements SurfaceHolder.Callback {
 					valueY, w / 7);
 			canvas.drawPath(myPathSmileDown, pSmile);
 
-			myPathInUp = drawCurveUp(canvas, pIn, mPoint1, mPoint2, valueY/1.3,
+			myPathInUp = drawCurveUp(canvas, pIn, mPoint1, mPoint2, valueY/1.6,
 					w / 7);
 			canvas.drawPath(myPathInUp, pIn);
-			myPathInDown = drawCurveDown(canvas, pIn, mPoint1, mPoint2, valueY/1.3,
+			myPathInDown = drawCurveDown(canvas, pIn, mPoint1, mPoint2, valueY/1.6,
 					w / 7);
 			canvas.drawPath(myPathInDown, pIn);
 		}

@@ -1,6 +1,8 @@
 package com.morphoss.xo_speak;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
@@ -8,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.text.Editable;
@@ -266,8 +269,18 @@ public class MainActivity extends Activity implements
 	private void repeatText() {
 
 		String text = txtBox.getText().toString();
-		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-		Thread thread = new Thread(new CheckTTSStillGoing());
+		HashMap<String, String> myHashRender = new HashMap<String, String>();
+        myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, text);
+
+        String exStoragePath                = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File appTmpPath                     = new File(exStoragePath);
+        appTmpPath.mkdirs();
+        String tempFilename                 = "tmpaudio.wav";
+        String tempDestFile                 = appTmpPath.getAbsolutePath() + "/" + tempFilename;
+
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        tts.synthesizeToFile(text, myHashRender, tempDestFile);
+    	Thread thread = new Thread(new CheckTTSStillGoing());
 		thread.start();
 	}
 
