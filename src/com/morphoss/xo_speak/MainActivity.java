@@ -276,7 +276,7 @@ public class MainActivity extends Activity implements
         String exStoragePath                = Environment.getExternalStorageDirectory().getAbsolutePath();
         File appTmpPath                     = new File(exStoragePath);
         appTmpPath.mkdirs();
-        String tempFilename                 = "tmpaudio.wav";
+        String tempFilename                 = "xo_speak_audio.wav";
         String tempDestFile                 = appTmpPath.getAbsolutePath() + "/" + tempFilename;
 
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
