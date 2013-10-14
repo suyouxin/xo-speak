@@ -27,28 +27,26 @@ import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnStyleEyesSelectedListener;
 
 @SuppressLint("DrawAllocation")
-public class eyeOutLayout extends View implements SurfaceHolder.Callback{
+public class eyeOutView extends View implements SurfaceHolder.Callback{
 
 	
-	ArrayList<EyeOutside> mEyeOutside;
+	public static ArrayList<EyeOutside> mEyeOutside;
 	ArrayList<EyeInitCoordinates> mCoordinates;
-	public int height = this.getMeasuredHeight();
-	public int width = this.getMeasuredWidth();
 	
-	private static final String TAG = "eyeOutLayout";
+	private static final String TAG = "eyeOutView";
 	//by default the shape of the eyes is "Round"
 	public static int shapeEyes = 1;
 	
-	public eyeOutLayout(Context context) {
+	public eyeOutView(Context context) {
 		super(context);
 		initCoordinates();
 	}
 	
-	public eyeOutLayout(Context context, AttributeSet attrs) {
+	public eyeOutView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initCoordinates();
 	}
-	public eyeOutLayout(Context context, AttributeSet attrs, int defStyle) {
+	public eyeOutView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initCoordinates();
 	}
@@ -108,7 +106,7 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 			eyeball.draw(canvas);
 			PointF mPoint1 = new PointF(eyeball.centerX-eyeball.radius, eyeball.centerY-eyeball.radius-25);
 			PointF mPoint2 = new PointF(eyeball.centerX+eyeball.radius, eyeball.centerY-eyeball.radius-25);
-			mPath = drawCurveUp(canvas, pEyebrow, mPoint1, mPoint2, 27, width/12);
+			mPath = drawCurveUp(canvas, pEyebrow, mPoint1, mPoint2, 27, eyeball.radius);
 			canvas.drawPath(mPath, pEyebrow);
 		}
 		
@@ -126,8 +124,6 @@ public class eyeOutLayout extends View implements SurfaceHolder.Callback{
 	}
 	private Path drawCurveUp(Canvas canvas, Paint paint, PointF mPointa,
 			PointF mPointb, double valueY, int centerCurve) {
-		width = this.getMeasuredWidth();
-		height = this.getMeasuredHeight();
 		Path myPath = new Path();
 		myPath.moveTo(mPointa.x, mPointa.y);
 		myPath.quadTo(mPointa.x + centerCurve, (float) (mPointa.y - valueY), mPointb.x,

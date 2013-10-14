@@ -36,9 +36,9 @@ import com.morphoss.xo_speak.listeners.OnMouthStyleSelectedListener;
 import com.morphoss.xo_speak.listeners.OnNoseStyleSelectedListener;
 import com.morphoss.xo_speak.listeners.OnNumberEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnStyleEyesSelectedListener;
-import com.morphoss.xo_speak.views.MouthLayout;
-import com.morphoss.xo_speak.views.eyeInLayout;
-import com.morphoss.xo_speak.views.eyeOutLayout;
+import com.morphoss.xo_speak.views.MouthView;
+import com.morphoss.xo_speak.views.eyeInView;
+import com.morphoss.xo_speak.views.eyeOutView;
 
 public class MainActivity extends Activity implements
 		TextToSpeech.OnInitListener, TextWatcher {
@@ -52,9 +52,9 @@ public class MainActivity extends Activity implements
 	private static final String TAG = "MainActivity";
 	public ImageView nose;
 	private ImageView speaker;
-	private eyeOutLayout eyesOut;
-	private eyeInLayout eyesIn;
-	private MouthLayout mouth;
+	private eyeOutView eyesOut;
+	private eyeInView eyesIn;
+	private MouthView mouth;
 	private SeekBar pitchSlider, speedSlider;
 	private TextView mSetPitch, mSetSpeed, textSavedMem1;
 	private Handler h = new Handler();
@@ -74,10 +74,10 @@ public class MainActivity extends Activity implements
 		mSetPitch = (TextView) findViewById(R.id.set_pitch);
 		mSetSpeed = (TextView) findViewById(R.id.set_speed);
 		speedSlider = (SeekBar) findViewById(R.id.speedSlider);
-		eyesIn = (eyeInLayout) findViewById(R.id.eyeIn);
-		eyesOut = (eyeOutLayout) findViewById(R.id.eyeOut);
+		eyesIn = (eyeInView) findViewById(R.id.eyeIn);
+		eyesOut = (eyeOutView) findViewById(R.id.eyeOut);
 		nose = (ImageView) findViewById(R.id.nose);
-		mouth = (MouthLayout) findViewById(R.id.mouth);
+		mouth = (MouthView) findViewById(R.id.mouth);
 		pitchSlider.setOnSeekBarChangeListener(new pitchListener());
 		speedSlider.setOnSeekBarChangeListener(new speedListener());
 

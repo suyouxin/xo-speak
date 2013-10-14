@@ -15,24 +15,24 @@ import android.view.View;
 
 import com.morphoss.xo_speak.listeners.OnMouthStyleSelectedListener;
 
-public class MouthLayout extends View implements SurfaceHolder.Callback {
+public class MouthView extends View implements SurfaceHolder.Callback {
 
 	private static Paint pIn = new Paint();
 	private static Paint pOut = new Paint();
 	public static double valueY = 30;
 	private int w;
 	private int h;
-	private static final String TAG = "MouthLayout";
+	private static final String TAG = "MouthView";
 
-	public MouthLayout(Context context) {
+	public MouthView(Context context) {
 		super(context);
 	}
 
-	public MouthLayout(Context context, AttributeSet attrs) {
+	public MouthView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public MouthLayout(Context context, AttributeSet attrs, int defStyle) {
+	public MouthView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 

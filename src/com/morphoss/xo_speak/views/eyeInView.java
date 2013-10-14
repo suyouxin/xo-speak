@@ -15,22 +15,20 @@ import com.morphoss.xo_speak.coordinates.EyeInitCoordinates;
 import com.morphoss.xo_speak.layout.EyeInside;
 import com.morphoss.xo_speak.layout.EyeOutside;
 
-public class eyeInLayout extends View implements SurfaceHolder.Callback {
+public class eyeInView extends View implements SurfaceHolder.Callback {
 	
 	ArrayList<EyeInside> mEyeInside;
 	ArrayList<EyeInitCoordinates> mCoordinates;
-	public static final String TAG = "eyeInLayout";
+	public static final String TAG = "eyeInView";
 	
-	private Paint p = new Paint();
-	
-	public eyeInLayout(Context context) {
+	public eyeInView(Context context) {
 		super(context);
 	}
 	
-	public eyeInLayout(Context context, AttributeSet attrs) {
+	public eyeInView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-	public eyeInLayout(Context context, AttributeSet attrs, int defStyle) {
+	public eyeInView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -72,18 +70,18 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 	}
 
     public void calcEye(int touchX, int touchY) {
-    	int w = this.getMeasuredWidth()/2;
-		int h = this.getMeasuredHeight()/4;
-		int r = w/12;
-		int Y = h;
-		for (EyeInside eye : mEyeInside) {
+		for (EyeOutside eyeOut : eyeOutView.mEyeOutside) {
+			for(EyeInside eye : mEyeInside){
+			int Y = eye.centerY;
+			int r = (int) (eyeOut.radius/2.3);
+			int radiusBall = (int) (eye.radius/2.5);
 			if(Y < touchY){
 			double centerToPoint = Math.sqrt(Math.pow(touchX-eye.centerX, 2)+Math.pow(touchY-Y, 2));	
 			int projX = (int) (eye.centerX + ((r*(touchX-eye.centerX))/centerToPoint));
 			int projY = (int) (Y + Math.sqrt(Math.pow(r, 2) - Math.pow(projX - eye.centerX, 2)));
 			eye.ballX = projX;
 			eye.ballY = projY;
-			eye.ballRadius = w /16;
+			eye.ballRadius = radiusBall;
 			}
 			if(Y > touchY){
 			double centerToPoint = Math.sqrt(Math.pow(touchX-eye.centerX, 2)+Math.pow(Y-touchY, 2));	
@@ -91,18 +89,17 @@ public class eyeInLayout extends View implements SurfaceHolder.Callback {
 			int projY = (int) (Y - Math.sqrt(Math.pow(r, 2) - Math.pow(projX - eye.centerX, 2)));
 			eye.ballX = projX;
 			eye.ballY = projY;
-			eye.ballRadius = w /16;
+			eye.ballRadius = radiusBall;
+			}
 			}
 		}
 		
     }
 	
     public void moveEye(double i) {
-    	int w = this.getMeasuredWidth()/2;
-		int h = this.getMeasuredHeight()/4;
-		int r = w/12;
-		int Y = h;
 		for (EyeInside eye : mEyeInside) {
+			int r = eye.radius;
+			int Y = eye.centerY;
 			eye.ballY = Y;
 			eye.ballY += i;
 			if(eye.ballY >= Y+r ){

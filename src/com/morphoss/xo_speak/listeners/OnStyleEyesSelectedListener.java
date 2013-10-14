@@ -7,8 +7,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.morphoss.xo_speak.MainActivity;
-import com.morphoss.xo_speak.views.eyeInLayout;
-import com.morphoss.xo_speak.views.eyeOutLayout;
+import com.morphoss.xo_speak.views.eyeInView;
+import com.morphoss.xo_speak.views.eyeOutView;
 
 public class OnStyleEyesSelectedListener implements OnItemSelectedListener {
 

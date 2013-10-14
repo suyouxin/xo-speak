@@ -115,19 +115,19 @@
         android:layout_toRightOf="@+id/actionBar"
         android:orientation="horizontal" >
 
-        <com.morphoss.xo_speak.views.eyeOutLayout
+        <com.morphoss.xo_speak.views.eyeOutView
             android:id="@+id/eyeOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp" />
 
-        <com.morphoss.xo_speak.views.eyeInLayout
+        <com.morphoss.xo_speak.views.eyeInView
             android:id="@+id/eyeIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp" />
 
-        <com.morphoss.xo_speak.views.MouthLayout
+        <com.morphoss.xo_speak.views.MouthView
             android:id="@+id/mouth"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="210dp" />
+            android:layout_marginTop="230dp" />
     </FrameLayout>
 
     <AutoCompleteTextView
