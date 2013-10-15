@@ -96,11 +96,7 @@ public class MainActivity extends Activity implements
 				speakText();
 			}
 		});
-		// permit to remove the focus of the keyboard
-		/*
-		this.getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        */
+	
 		txtBox.setOnKeyListener(new OnKeyListener() {
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				Log.d(TAG, "Key pressed on " + v.getClass().toString());

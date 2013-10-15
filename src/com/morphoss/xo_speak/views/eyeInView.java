@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -33,13 +32,12 @@ public class eyeInView extends View implements SurfaceHolder.Callback {
 	}
 
 	public void setEyes(ArrayList<EyeOutside> eyes) {
-		int w = this.getMeasuredWidth()/2;
 		mEyeInside = new ArrayList<EyeInside>();
 		for (EyeOutside eyeball : eyes) {
 			EyeInside insideEye = eyeball.getInsideEye();
 			insideEye.ballX = insideEye.centerX;
 			insideEye.ballY = insideEye.centerY+15;
-			insideEye.ballRadius = w/16;
+			insideEye.ballRadius = (int) (insideEye.radius/2.5);
 			mEyeInside.add(insideEye);
 		}
 	}
@@ -68,6 +66,7 @@ public class eyeInView extends View implements SurfaceHolder.Callback {
 		}
 		return true;
 	}
+
 
     public void calcEye(int touchX, int touchY) {
 		for (EyeOutside eyeOut : eyeOutView.mEyeOutside) {
