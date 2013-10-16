@@ -102,8 +102,8 @@ public class eyeInView extends View implements SurfaceHolder.Callback {
 			int Y = eye.centerY;
 			eye.ballY = Y;
 			eye.ballY += i;
-			if(eye.ballY >= Y+r ){
-				i=0;
+			if(eye.ballY >= eye.centerY+eye.radius-eye.ballRadius ){
+				eye.ballY = eye.centerY+eye.radius-eye.ballRadius;
 			}
 			eye.ballX = eye.centerX;
 		}
