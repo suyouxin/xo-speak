@@ -28,9 +28,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+import bitoflife.chatterbean.ChatterBean;
 
-import com.morphoss.xo_speak.layout.EyeInside;
 import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.listeners.OnColorEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnLanguageSelectedListener;
@@ -61,6 +60,7 @@ public class MainActivity extends Activity implements
 	private TextView mSetPitch, mSetSpeed, textSavedMem1;
 	private Handler h = new Handler();
 	private ArrayList<String> item = new ArrayList<String>();
+	private ChatterBean mCb;
 
 	@SuppressLint("ServiceCast")
 	@Override
@@ -119,6 +119,7 @@ public class MainActivity extends Activity implements
 				return false;
 			}
 		});
+		robotInit();
 		txtBox.setOnFocusChangeListener(new OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -405,6 +406,28 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+	}
+	public void robotInit() {
+	    mCb = new ChatterBean(getResources().getAssets());
+        mCb.init();
+	}
+
+	public String robotTest(String question) {
+	    /*
+        Log.d("Test", mCb.respond("How are you"));
+        Log.d("Test", mCb.respond("who are you"));
+        Log.d("Test", mCb.respond("what is the weather"));
+        Log.d("Test", mCb.respond("au canada"));
+        Log.d("Test", mCb.respond("a robot"));*/
+	    String ret;
+	    
+	    try {
+	        ret = mCb.respond(question);
+	    }
+	    catch(Exception e) {
+	        ret = "I don't know!";
+	    }
+        return ret;
 	}
 
 }
