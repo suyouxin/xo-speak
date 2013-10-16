@@ -1,14 +1,12 @@
 package com.morphoss.xo_speak.listeners;
 
+import com.morphoss.xo_speak.R;
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.morphoss.xo_speak.MainActivity;
-import com.morphoss.xo_speak.views.eyeInView;
-import com.morphoss.xo_speak.views.eyeOutView;
 
 public class OnStyleEyesSelectedListener implements OnItemSelectedListener {
 
@@ -24,13 +22,13 @@ public class OnStyleEyesSelectedListener implements OnItemSelectedListener {
 	public void onItemSelected(AdapterView parent, View view, int pos, long id) {
 		
 		
-		if(parent.getItemAtPosition(pos).toString().contains("Round")){
+		if(parent.getItemAtPosition(pos).equals(mActivity.getString(R.string.eyes_round))){
 			shapeEyes = 1;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Square")){
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.eyes_square))){
 			shapeEyes = 2;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Glasses")){
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.eyes_glasses))){
 			shapeEyes = 3;
 		}
 		mActivity.refreshFace();

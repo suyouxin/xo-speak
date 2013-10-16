@@ -109,6 +109,8 @@ public class MainActivity extends Activity implements
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
 						speakText();
+						/*String text = txtBox.getText().toString();
+					    repeatTextRobot(robotTest(text));*/
 						txtBox.setFocusable(false);
 						txtBox.setFocusableInTouchMode(true);
 						return true;
@@ -119,7 +121,7 @@ public class MainActivity extends Activity implements
 				return false;
 			}
 		});
-		robotInit();
+		//robotInit();
 		txtBox.setOnFocusChangeListener(new OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -315,6 +317,12 @@ public class MainActivity extends Activity implements
 		Thread thread = new Thread(new CheckTTSStillGoing());
 		thread.start();
 	}
+	private void repeatTextRobot(String words) {
+
+		// String text = txtBox.getText().toString();
+	    Log.d("Test", words);
+		tts.speak(words, TextToSpeech.QUEUE_FLUSH, null);
+	}
 
 	class CheckTTSStillGoing implements Runnable {
 
@@ -407,18 +415,18 @@ public class MainActivity extends Activity implements
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 	}
-	public void robotInit() {
+	/*public void robotInit() {
 	    mCb = new ChatterBean(getResources().getAssets());
         mCb.init();
 	}
 
 	public String robotTest(String question) {
-	    /*
+	    
         Log.d("Test", mCb.respond("How are you"));
         Log.d("Test", mCb.respond("who are you"));
         Log.d("Test", mCb.respond("what is the weather"));
         Log.d("Test", mCb.respond("au canada"));
-        Log.d("Test", mCb.respond("a robot"));*/
+        Log.d("Test", mCb.respond("a robot"));
 	    String ret;
 	    
 	    try {
@@ -428,6 +436,6 @@ public class MainActivity extends Activity implements
 	        ret = "I don't know!";
 	    }
         return ret;
-	}
+	}*/
 
 }

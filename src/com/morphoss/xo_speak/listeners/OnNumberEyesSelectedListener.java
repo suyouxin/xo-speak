@@ -7,8 +7,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.morphoss.xo_speak.MainActivity;
-import com.morphoss.xo_speak.views.eyeInView;
-import com.morphoss.xo_speak.views.eyeOutView;
+import com.morphoss.xo_speak.R;
 
 public class OnNumberEyesSelectedListener implements OnItemSelectedListener {
 
@@ -25,23 +24,23 @@ public class OnNumberEyesSelectedListener implements OnItemSelectedListener {
 	public void onItemSelected(AdapterView parent, View view, int pos, long id) {
 		
 		
-		if(parent.getItemAtPosition(pos).toString().contains("One")){
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.eyes_one))){
 			Log.d(TAG, "one eye selected");
 			numberEyes = 1;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Two")){
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.eyes_two))){
 			Log.d(TAG, "two eyes selected");
 			numberEyes = 2;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Three")){
+		if(parent.getItemAtPosition(pos).equals(mActivity.getString(R.string.eyes_three))){
 			Log.d(TAG, "three eyes selected");
 			numberEyes = 3;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Four")){
+		if(parent.getItemAtPosition(pos).equals(mActivity.getString(R.string.eyes_four))){
 			Log.d(TAG, "four eyes selected");
 			numberEyes = 4;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Five")){
+		if(parent.getItemAtPosition(pos).equals(mActivity.getString(R.string.eyes_five))){
 			Log.d(TAG, "five eyes selected");
 			numberEyes = 5;
 		}

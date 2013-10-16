@@ -1,12 +1,14 @@
 package com.morphoss.xo_speak.listeners;
 
-import com.morphoss.xo_speak.MainActivity;
-
+import android.app.Activity;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Toast;
+
+import com.morphoss.xo_speak.MainActivity;
+import com.morphoss.xo_speak.R;
 
 public class OnMouthStyleSelectedListener implements OnItemSelectedListener {
 
@@ -20,16 +22,16 @@ public class OnMouthStyleSelectedListener implements OnItemSelectedListener {
 	
 	@Override
 	public void onItemSelected(AdapterView parent, View view, int pos, long id) {
-
-		if(parent.getItemAtPosition(pos).toString().contains("Simple")){
+		
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.simple_mouth))){
 			Log.d(TAG, "Simple style mouth");
 			style = 1;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("Waveform")){
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.waveform))){
 			Log.d(TAG, "Waveform style mouth");
 			style = 2;
 		}
-		if(parent.getItemAtPosition(pos).toString().contains("smile")){
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.shining_smile))){
 			Log.d(TAG, "Shining smile style mouth");
 			style = 3;
 		}

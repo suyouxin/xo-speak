@@ -14,38 +14,60 @@
     <string name="start">Start</string>
     <string name="setpitch">Pitch :</string>
     <string name="setspeed">Speed :</string>
+    <string name="eyes_one">One</string>
+    <string name="eyes_two">Two</string>
+    <string name="eyes_three">Three</string>
+    <string name="eyes_four">Four</string>
+    <string name="eyes_five">Five</string>
+    <string name="eyes_round">Round</string>
+    <string name="eyes_square">Square</string>
+    <string name="eyes_glasses">Glasses</string>
+    <string name="eyes_black">Black</string>
+    <string name="eyes_blue">Blue</string>
+    <string name="eyes_green">Green</string>
+    <string name="eyes_brown">Brown</string>
+    <string name="eyes_gray">Gray</string>
+    <string name="eyes_red">Red</string>
+    <string name="nose_choice1">Choice 1</string>
+    <string name="nose_choice2">Choice 2</string>
+    <string name="nose_choice3">Choice 3</string>
+    <string name="nose_choice4">Choice 4</string>
+    <string name="nose_choice5">Choice 5</string>
+    <string name="simple_mouth">Simple style</string>
+    <string name="waveform">Waveform</string>
+    <string name="shining_smile">Shining smile</string>
 
     <string-array name="number_eyes">
-        <item>Two</item>
-        <item>One</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
+        <item>@string/eyes_two</item>
+        <item>@string/eyes_one</item>
+        <item>@string/eyes_three</item>
+        <item>@string/eyes_four</item>
+        <item>@string/eyes_five</item>
     </string-array>
     <string-array name="eyes_style">
-        <item>Round</item>
-        <item>Square</item>
-        <item>Glasses</item>
+        <item>@string/eyes_round</item>
+        <item>@string/eyes_square</item>
+        <item>@string/eyes_glasses</item>
     </string-array>
     <string-array name="color_eyes">
-        <item>Black</item>
-        <item>Blue</item>
-        <item>Green</item>
-        <item>Brown</item>
-        <item>Gray</item>
-        <item>Red</item>
+        <item>@string/eyes_black</item>
+        <item>@string/eyes_blue</item>
+        <item>@string/eyes_green</item>
+        <item>@string/eyes_brown</item>
+        <item>@string/eyes_gray</item>
+        <item>@string/eyes_red</item>
     </string-array>
     <string-array name="nose_style">
-        <item>Choice 1</item>
-        <item>Choice 2</item>
-        <item>Choice 3</item>
-        <item>Choice 4</item>
-        <item>Choice 5</item>
+        <item>@string/nose_choice1</item>
+        <item>@string/nose_choice2</item>
+        <item>@string/nose_choice3</item>
+        <item>@string/nose_choice4</item>
+        <item>@string/nose_choice5</item>
     </string-array>
     <string-array name="mouth_style">
-        <item>Simple style</item>
-        <item>Waveform</item>
-        <item>Shining smile</item>
+        <item>@string/simple_mouth</item>
+        <item>@string/waveform</item>
+        <item>@string/shining_smile</item>
     </string-array>
 
 </resources>
