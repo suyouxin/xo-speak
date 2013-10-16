@@ -15,7 +15,7 @@
 
         <Spinner
             android:id="@+id/spinnerLanguage"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:prompt="@string/language_prompt" />
@@ -31,7 +31,7 @@
 
         <SeekBar
             android:id="@+id/pitchSlider"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="85dp"
@@ -49,7 +49,7 @@
 
         <SeekBar
             android:id="@+id/speedSlider"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="170dp"
@@ -58,7 +58,7 @@
 
         <Spinner
             android:id="@+id/spinnerNumberEyes"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="210dp"
@@ -67,7 +67,7 @@
 
         <Spinner
             android:id="@+id/spinnerStyleEyes"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="255dp"
@@ -76,7 +76,7 @@
 
         <Spinner
             android:id="@+id/spinnerColorEyes"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="300dp"
@@ -85,7 +85,7 @@
 
         <Spinner
             android:id="@+id/spinnerNoseStyle"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="345dp"
@@ -94,7 +94,7 @@
 
         <Spinner
             android:id="@+id/spinnerMouthStyle"
-            android:layout_width="130dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center"
             android:layout_marginTop="390dp"

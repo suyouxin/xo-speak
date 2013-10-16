@@ -31,8 +31,8 @@ public class OnMouthStyleSelectedListener implements OnItemSelectedListener {
 			Log.d(TAG, "Waveform style mouth");
 			style = 2;
 		}
-		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.shining_smile))){
-			Log.d(TAG, "Shining smile style mouth");
+		if(parent.getItemAtPosition(pos).toString().equals(mActivity.getString(R.string.mouth_teeth))){
+			Log.d(TAG, "With teeth style mouth");
 			style = 3;
 		}
 		mActivity.refreshFace();

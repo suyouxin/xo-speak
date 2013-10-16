@@ -35,7 +35,7 @@
     <string name="nose_choice5">Choice 5</string>
     <string name="simple_mouth">Simple style</string>
     <string name="waveform">Waveform</string>
-    <string name="shining_smile">Shining smile</string>
+    <string name="mouth_teeth">Mouth with teeth</string>
 
     <string-array name="number_eyes">
         <item>@string/eyes_two</item>
@@ -67,7 +67,7 @@
     <string-array name="mouth_style">
         <item>@string/simple_mouth</item>
         <item>@string/waveform</item>
-        <item>@string/shining_smile</item>
+        <item>@string/mouth_teeth</item>
     </string-array>
 
 </resources>
