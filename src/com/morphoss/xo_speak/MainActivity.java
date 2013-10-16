@@ -19,8 +19,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnKeyListener;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -28,7 +28,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.morphoss.xo_speak.layout.EyeInside;
 import com.morphoss.xo_speak.layout.EyeOutside;
 import com.morphoss.xo_speak.listeners.OnColorEyesSelectedListener;
 import com.morphoss.xo_speak.listeners.OnLanguageSelectedListener;
@@ -96,16 +98,19 @@ public class MainActivity extends Activity implements
 				speakText();
 			}
 		});
-	
+
 		txtBox.setOnKeyListener(new OnKeyListener() {
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				keyCode = event.getKeyCode();
 				Log.d(TAG, "Key pressed on " + v.getClass().toString());
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					Log.d(TAG, "key event action down");
 					switch (keyCode) {
 					case KeyEvent.KEYCODE_DPAD_CENTER:
 					case KeyEvent.KEYCODE_ENTER:
 						speakText();
-
+						txtBox.setFocusable(false);
+						txtBox.setFocusableInTouchMode(true);
 						return true;
 					default:
 						break;
@@ -114,6 +119,34 @@ public class MainActivity extends Activity implements
 				return false;
 			}
 		});
+		txtBox.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					Log.d(TAG, "get the focus");
+						
+				} else {
+					Log.d(TAG, "lost the focus");
+				}
+			}
+		});
+		txtBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+               eyesIn.calcEye(8*txtBox.getSelectionStart(), 512);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                
+            }
+        });
 		LoadPreferences();
 	}
 
@@ -267,17 +300,18 @@ public class MainActivity extends Activity implements
 
 		String text = txtBox.getText().toString();
 		HashMap<String, String> myHashRender = new HashMap<String, String>();
-        myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, text);
+		myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, text);
 
-        String exStoragePath                = Environment.getExternalStorageDirectory().getAbsolutePath();
-        File appTmpPath                     = new File(exStoragePath);
-        appTmpPath.mkdirs();
-        String tempFilename                 = "xo_speak_audio.wav";
-        String tempDestFile                 = appTmpPath.getAbsolutePath() + "/" + tempFilename;
+		String exStoragePath = Environment.getExternalStorageDirectory()
+				.getAbsolutePath();
+		File appTmpPath = new File(exStoragePath);
+		appTmpPath.mkdirs();
+		String tempFilename = "xo_speak_audio.wav";
+		String tempDestFile = appTmpPath.getAbsolutePath() + "/" + tempFilename;
 
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-        tts.synthesizeToFile(text, myHashRender, tempDestFile);
-    	Thread thread = new Thread(new CheckTTSStillGoing());
+		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+		tts.synthesizeToFile(text, myHashRender, tempDestFile);
+		Thread thread = new Thread(new CheckTTSStillGoing());
 		thread.start();
 	}
 

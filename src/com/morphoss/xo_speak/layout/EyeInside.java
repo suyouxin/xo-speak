@@ -22,6 +22,9 @@ public class EyeInside extends EyeOutside {
 		Paint pBlack = new Paint();
 		Paint pIn = new Paint();
 
+		p.setAntiAlias(true);
+		pBlack.setAntiAlias(true);
+		pIn.setAntiAlias(true);
 		if(OnColorEyesSelectedListener.colorEyes == 1){
 		p.setColor(Color.rgb(15, 14, 20));
 		}

@@ -15,6 +15,8 @@ public class EyeShapeSquare extends EyeOutside {
 		Paint pIn = new Paint();
 		Paint pOut = new Paint();
 
+		pIn.setAntiAlias(true);
+		pOut.setAntiAlias(true);
 		pOut.setColor(Color.BLACK);
 		pIn.setColor(Color.WHITE);
 		pOut.setStyle(Paint.Style.FILL);

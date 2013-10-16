@@ -2,6 +2,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="horizontal" >
 
     <FrameLayout
@@ -149,6 +151,8 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/actionBar"
         android:completionThreshold="1"
+        android:nextFocusLeft="@id/autocompleteText"
+        android:nextFocusUp="@id/autocompleteText"
         android:singleLine="true" />
 
 </RelativeLayout>

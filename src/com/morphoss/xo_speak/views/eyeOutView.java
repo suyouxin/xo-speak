@@ -93,6 +93,10 @@ public class eyeOutView extends View implements SurfaceHolder.Callback{
 		
 		Paint pLine = new Paint();
 		Paint pEyebrow = new Paint();
+		
+		pLine.setAntiAlias(true);
+		pEyebrow.setAntiAlias(true);
+		
 		Path mPath = new Path();
 		pEyebrow.setColor(Color.BLACK);
 		pEyebrow.setStyle(Paint.Style.STROKE);

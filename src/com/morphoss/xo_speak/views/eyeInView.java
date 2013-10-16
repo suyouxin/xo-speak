@@ -16,7 +16,7 @@ import com.morphoss.xo_speak.layout.EyeOutside;
 
 public class eyeInView extends View implements SurfaceHolder.Callback {
 	
-	ArrayList<EyeInside> mEyeInside;
+	public static ArrayList<EyeInside> mEyeInside;
 	ArrayList<EyeInitCoordinates> mCoordinates;
 	public static final String TAG = "eyeInView";
 	
@@ -92,6 +92,7 @@ public class eyeInView extends View implements SurfaceHolder.Callback {
 			}
 			}
 		}
+		this.invalidate();
 		
     }
 	
@@ -102,7 +103,7 @@ public class eyeInView extends View implements SurfaceHolder.Callback {
 			eye.ballY = Y;
 			eye.ballY += i;
 			if(eye.ballY >= Y+r ){
-				eye.ballY = Y - r;
+				i=0;
 			}
 			eye.ballX = eye.centerX;
 		}
