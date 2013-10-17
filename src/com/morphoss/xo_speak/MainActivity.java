@@ -305,15 +305,15 @@ public class MainActivity extends Activity implements
 		HashMap<String, String> myHashRender = new HashMap<String, String>();
 		myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, text);
 
-		String exStoragePath = Environment.getExternalStorageDirectory()
+		/*String exStoragePath = Environment.getExternalStorageDirectory()
 				.getAbsolutePath();
 		File appTmpPath = new File(exStoragePath);
 		appTmpPath.mkdirs();
 		String tempFilename = "xo_speak_audio.wav";
-		String tempDestFile = appTmpPath.getAbsolutePath() + "/" + tempFilename;
+		String tempDestFile = appTmpPath.getAbsolutePath() + "/" + tempFilename;*/
 
 		tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-		tts.synthesizeToFile(text, myHashRender, tempDestFile);
+		//tts.synthesizeToFile(text, myHashRender, tempDestFile);
 		Thread thread = new Thread(new CheckTTSStillGoing());
 		thread.start();
 	}
