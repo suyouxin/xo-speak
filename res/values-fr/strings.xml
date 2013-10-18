@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Parlons-xo</string>
+    <string name="action_settings">Réglages</string>
+    <string name="textTitle">Text To Speech</string>
+    <string name="language_prompt">Langage</string>
+    <string name="color_eyes__prompt">Couleur des yeux</string>
+    <string name="style_eyes__prompt">Style des yeux</string>
+    <string name="number_eyes__prompt">Nombre d\'yeux</string>
+    <string name="nose_style__prompt">Style du nez</string>
+    <string name="mouth_style__prompt">Style de la bouche</string>
+    <string name="default_language">Défaut</string>
+    <string name="setpitch">Ton :</string>
+    <string name="setspeed">Vitesse :</string>
+    <string name="eyes_one">Un</string>
+    <string name="eyes_two">Deux</string>
+    <string name="eyes_three">Trois</string>
+    <string name="eyes_four">Quatre</string>
+    <string name="eyes_five">Cinq</string>
+    <string name="eyes_round">Rond</string>
+    <string name="eyes_square">Carré</string>
+    <string name="eyes_glasses">Lunettes</string>
+    <string name="eyes_black">Noir</string>
+    <string name="eyes_blue">Bleu</string>
+    <string name="eyes_green">Vert</string>
+    <string name="eyes_brown">Marron</string>
+    <string name="eyes_gray">Gris</string>
+    <string name="eyes_red">Rouge</string>
+    <string name="nose_choice1">Choix 1</string>
+    <string name="nose_choice2">Choix 2</string>
+    <string name="nose_choice3">Choix 3</string>
+    <string name="nose_choice4">Choix 4</string>
+    <string name="nose_choice5">Choix 5</string>
+    <string name="simple_mouth">Bouche simple</string>
+    <string name="waveform">Forme d\'une vague</string>
+    <string name="mouth_teeth">Bouche avec des dents</string>
+
+    <string-array name="number_eyes">
+        <item>@string/eyes_two</item>
+        <item>@string/eyes_one</item>
+        <item>@string/eyes_three</item>
+        <item>@string/eyes_four</item>
+        <item>@string/eyes_five</item>
+    </string-array>
+    <string-array name="eyes_style">
+        <item>@string/eyes_round</item>
+        <item>@string/eyes_square</item>
+        <item>@string/eyes_glasses</item>
+    </string-array>
+    <string-array name="color_eyes">
+        <item>@string/eyes_black</item>
+        <item>@string/eyes_blue</item>
+        <item>@string/eyes_green</item>
+        <item>@string/eyes_brown</item>
+        <item>@string/eyes_gray</item>
+        <item>@string/eyes_red</item>
+    </string-array>
+    <string-array name="nose_style">
+        <item>@string/nose_choice1</item>
+        <item>@string/nose_choice2</item>
+        <item>@string/nose_choice3</item>
+        <item>@string/nose_choice4</item>
+        <item>@string/nose_choice5</item>
+    </string-array>
+    <string-array name="mouth_style">
+        <item>@string/simple_mouth</item>
+        <item>@string/waveform</item>
+        <item>@string/mouth_teeth</item>
+    </string-array>
+
+</resources>
